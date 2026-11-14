@@ -70,7 +70,7 @@ export default function EnquiryForm({
   const labelCls = `mb-1.5 block text-sm font-medium ${dark ? 'text-white' : 'text-ink'}`
   const field = (name, type, autoComplete, inputMode) => (
     <div>
-      <label htmlFor={`${uid}-${name}`} className={labels ? labelCls : 'sr-only'}>
+      <label htmlFor={`${uid}-${name}`} className={labelCls}>
         {labels ? labels[name] : placeholders[name]}
       </label>
       <input
@@ -82,7 +82,7 @@ export default function EnquiryForm({
         value={values[name]}
         onChange={update}
         onBlur={blur}
-        placeholder={placeholders[name]}
+        placeholder={labels ? placeholders[name] : undefined}
         aria-invalid={errors[name] ? 'true' : undefined}
         aria-describedby={errors[name] ? `${uid}-${name}-err` : undefined}
         className="field"
@@ -99,10 +99,10 @@ export default function EnquiryForm({
     <form onSubmit={onSubmit} noValidate className="relative space-y-4">
       {field('name', 'text', 'name')}
       {field('email', 'email', 'email', 'email')}
-      {field('phone', 'tel', 'tel-national', 'numeric')}
+      {field('phone', 'tel', 'tel-national', 'tel')}
       {extra}
       <div>
-        <label htmlFor={`${uid}-message`} className={labels ? labelCls : 'sr-only'}>
+        <label htmlFor={`${uid}-message`} className={labelCls}>
           {labels ? labels.message : placeholders.message}
         </label>
         <textarea
@@ -111,7 +111,7 @@ export default function EnquiryForm({
           rows={4}
           value={values.message}
           onChange={update}
-          placeholder={placeholders.message}
+          placeholder={labels ? placeholders.message : undefined}
           maxLength={2000}
           className="field resize-y"
         />
@@ -123,7 +123,7 @@ export default function EnquiryForm({
           <input name="website" tabIndex={-1} autoComplete="off" value={values.website} onChange={update} />
         </label>
       </div>
-      <button type="submit" disabled={busy} className={`btn ${submitClass} w-full disabled:opacity-60`}>
+      <button type="submit" disabled={busy} className={`btn ${submitClass} min-h-13 w-full text-base disabled:opacity-60`}>
         {busy ? messages.submitting : messages.submit}
       </button>
       <div role="status" aria-live="polite">

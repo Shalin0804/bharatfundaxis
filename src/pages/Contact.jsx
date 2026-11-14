@@ -144,8 +144,8 @@ export default function Contact() {
           <SectionHead eyebrow={PROCESS.eyebrow} title={PROCESS.title} dark />
           <ol className="mt-12 grid gap-px overflow-hidden rounded-[var(--radius-panel)] bg-white/10 md:grid-cols-2 lg:grid-cols-4">
             {PROCESS.steps.map((s, i) => (
-              <li key={s.phase} className="reveal bg-ink/90 p-7">
-                <p className="font-display text-4xl text-gold">0{i + 1}</p>
+              <li key={s.phase} className="reveal bg-ink/90 p-6 sm:p-7">
+                <p className="font-display text-[2rem] leading-none text-gold sm:text-4xl">0{i + 1}</p>
                 <p className="mt-4 text-xs font-semibold tracking-wide text-mist">{s.phase}</p>
                 <h3 className="mt-2 font-display text-xl text-white">{s.title}</h3>
                 <p className="mt-2 text-sm font-semibold text-gold-pale">{s.short}</p>
@@ -186,8 +186,8 @@ export default function Contact() {
               ))}
             </ul>
           </div>
-          <div className="min-h-[22rem] overflow-hidden rounded-[var(--radius-panel)] ring-1 ring-line">
-            <iframe title={PRESENCE.mapTitle} src={CONTACT.mapEmbed} loading="lazy" referrerPolicy="no-referrer-when-downgrade" className="size-full min-h-[22rem] border-0" />
+          <div className="min-h-[18rem] overflow-hidden rounded-[var(--radius-panel)] bg-white ring-1 ring-line sm:min-h-[22rem]">
+            <iframe title={PRESENCE.mapTitle} src={CONTACT.mapEmbed} loading="lazy" referrerPolicy="no-referrer-when-downgrade" className="size-full min-h-[18rem] border-0 sm:min-h-[22rem]" />
           </div>
         </div>
       </section>

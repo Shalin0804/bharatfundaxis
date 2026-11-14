@@ -32,7 +32,7 @@ export default function Popup() {
       <div className="grid sm:grid-cols-[0.9fr_1.1fr]">
         <img src="/img/popup.webp" alt="BharatFundAxis Contact Advisory" width="640" height="960" loading="lazy" className="hidden h-full w-full object-cover sm:block" />
         <div className="p-6 sm:p-8">
-          <h2 className="display-md">{POPUP.title}</h2>
+          <h2 className="display-md pr-10">{POPUP.title}</h2>
           <p className="mb-6 mt-2 text-sm">{POPUP.copy}</p>
           <EnquiryForm
             topic={POPUP.topic}

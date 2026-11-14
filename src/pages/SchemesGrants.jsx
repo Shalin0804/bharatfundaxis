@@ -27,7 +27,7 @@ function SchemeDetail({ s, tag }) {
           <p className="mt-1 font-display text-3xl text-white">{s.amount}</p>
         </div>
       </header>
-      <div className="grid gap-8 px-6 py-8 sm:px-10 md:grid-cols-[1.2fr_1fr]">
+      <div className="grid gap-8 px-5 py-7 sm:px-10 sm:py-8 md:grid-cols-[1.2fr_1fr]">
         <div className="space-y-7">
           <section>
             <h3 className="font-sans text-sm font-semibold tracking-wide text-gold-deep">{L.overview}</h3>
@@ -68,13 +68,13 @@ function SchemeDetail({ s, tag }) {
 
 function SchemeCard({ s, onOpen }) {
   return (
-    <li className="card group flex flex-col p-6">
+    <li className="card group flex flex-col p-5 sm:p-6">
       <p className="text-xs font-semibold tracking-wide text-gold-deep">{s.code}</p>
       <h3 className="mt-2 font-display text-[1.45rem] leading-tight">{s.title}</h3>
       <p className="mt-1 text-sm">{s.ministry}</p>
-      <p className="mt-5 font-display text-2xl text-royal">{s.amount}</p>
+      <p className="mt-4 font-display text-2xl text-royal sm:mt-5">{s.amount}</p>
       <p className="mt-3 line-clamp-3 flex-1 text-sm">{s.summary}</p>
-      <button type="button" onClick={() => onOpen(s)} className="mt-6 inline-flex items-center gap-2 self-start font-semibold text-royal group-hover:gap-3">
+      <button type="button" onClick={() => onOpen(s)} className="-mb-2 mt-4 inline-flex min-h-11 items-center gap-2 self-start font-semibold text-royal group-hover:gap-3 sm:mt-6">
         View details <span className="sr-only">for {s.title}</span> <Icon name="arrow" size={18} />
       </button>
     </li>
@@ -156,14 +156,14 @@ export default function SchemesGrants() {
 
       <section id="directory" className="section">
         <div className="wrap">
-          <div role="group" aria-label="Filter by category" className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-2 sm:mx-0 sm:flex-wrap sm:px-0">
+          <div role="group" aria-label="Filter by category" className="-mx-4 flex snap-x gap-2 overflow-x-auto px-4 pb-2 [scrollbar-width:none] sm:mx-0 sm:flex-wrap sm:px-0">
             {CATEGORIES.map((c) => (
               <button
                 key={c}
                 type="button"
                 aria-pressed={c === category}
                 onClick={() => setCategory(c)}
-                className={`shrink-0 rounded-full px-4 py-2 text-sm font-medium transition-colors ${c === category ? 'bg-ink text-white' : 'bg-white text-ink ring-1 ring-line hover:ring-ink'}`}
+                className={`min-h-11 shrink-0 snap-start rounded-full px-4 py-2 text-sm font-medium transition-colors ${c === category ? 'bg-ink text-white' : 'bg-white text-ink ring-1 ring-line hover:ring-ink'}`}
               >
                 {c}
               </button>
@@ -172,7 +172,7 @@ export default function SchemesGrants() {
           <p className="mt-6 text-sm" aria-live="polite">{results.length} {results.length === 1 ? 'scheme' : 'schemes'}</p>
 
           {results.length === 0 ? (
-            <div className="mt-6 rounded-[var(--radius-panel)] border border-dashed border-line bg-white p-12 text-center">
+            <div className="mt-6 rounded-[var(--radius-panel)] border border-dashed border-line bg-white px-6 py-10 text-center sm:p-12">
               <p className="font-display text-2xl text-ink">{H.emptyTitle}</p>
               <p className="mt-2">{H.emptyCopy}</p>
             </div>

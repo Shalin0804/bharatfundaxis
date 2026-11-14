@@ -14,14 +14,14 @@ function Pillars() {
     <section id="invisible-foundation" className="section">
       <div className="wrap">
         <SectionHead eyebrow={PILLARS.eyebrow} title={PILLARS.title} />
-        <ol className="mt-14 grid gap-px overflow-hidden rounded-[var(--radius-panel)] border border-line bg-line md:grid-cols-5">
+        <ol className="mt-10 grid gap-px overflow-hidden rounded-[var(--radius-panel)] border border-line bg-line sm:mt-14 sm:grid-cols-2 md:grid-cols-5">
           {PILLARS.items.map((p, i) => (
-            <li key={p.pillar} className="reveal flex flex-col bg-white p-6">
+            <li key={p.pillar} className="reveal flex flex-col bg-white p-5 sm:p-6">
               <p className="text-xs font-semibold tracking-wide text-gold-deep">PILLAR 0{i + 1}</p>
               <h3 className="mt-3 font-display text-2xl">{p.pillar}</h3>
               <p className="mt-2 text-sm">{p.short}</p>
               <details className="group mt-auto pt-5">
-                <summary className="inline-flex cursor-pointer list-none items-center gap-1.5 text-sm font-semibold text-royal [&::-webkit-details-marker]:hidden">
+                <summary className="-my-3 inline-flex min-h-11 cursor-pointer list-none items-center gap-1.5 text-sm font-semibold text-royal [&::-webkit-details-marker]:hidden">
                   <span className="group-open:hidden">{PILLARS.more}</span>
                   <span className="hidden group-open:inline">{PILLARS.close}</span>
                   <Icon name="plus" size={15} className="transition-transform group-open:rotate-45" />
@@ -44,11 +44,11 @@ function Journey() {
     <section className="axis-field on-dark section text-white">
       <div className="wrap">
         <SectionHead eyebrow={JOURNEY.eyebrow} title={JOURNEY.title} dark />
-        <div className="relative mt-14">
+        <div className="relative mt-10 sm:mt-14">
           <div aria-hidden="true" className="absolute inset-x-0 top-[1.15rem] hidden h-px bg-white/15 md:block" />
-          <div role="tablist" aria-label="Business stages" className="relative -mx-4 flex gap-1 overflow-x-auto px-4 pb-2 md:mx-0 md:justify-between md:px-0">
+          <div role="tablist" aria-label="Business stages" className="relative -mx-4 flex snap-x gap-1 overflow-x-auto px-4 pb-2 [scrollbar-width:none] md:mx-0 md:justify-between md:px-0">
             {JOURNEY.stages.map((st, i) => (
-              <button key={st.label} {...tabProps(i)} className="group flex shrink-0 flex-col items-center gap-3 px-2 text-sm">
+              <button key={st.label} {...tabProps(i)} className="group flex min-h-11 min-w-20 shrink-0 snap-start flex-col items-center gap-3 px-2 text-sm">
                 <span className={`grid size-9 place-items-center rounded-full font-display transition-colors ${i === active ? 'bg-gold text-ink' : i < active ? 'bg-white/20 text-white' : 'bg-ink-2 text-mist ring-1 ring-white/15 group-hover:ring-gold'}`}>
                   {i + 1}
                 </span>
@@ -57,7 +57,7 @@ function Journey() {
             ))}
           </div>
         </div>
-        <div {...panelProps} className="glass mt-8 rounded-[var(--radius-panel)] p-7 sm:p-10">
+        <div {...panelProps} className="glass mt-8 rounded-[var(--radius-panel)] p-6 sm:p-10">
           <AnimatePresence mode="wait" initial={false}>
             <m.div key={s.label} {...fade} className="grid gap-4 md:grid-cols-[14rem_1fr] md:gap-10">
               <p className="text-sm font-semibold tracking-wide text-gold">{s.label.toUpperCase()}</p>
@@ -94,7 +94,7 @@ function Model() {
               </button>
             ))}
           </div>
-          <div {...panelProps} className="axis-field on-dark relative overflow-hidden rounded-[var(--radius-panel)] p-8 text-white sm:p-10 lg:sticky lg:top-36 lg:self-start">
+          <div {...panelProps} className="axis-field on-dark relative overflow-hidden rounded-[var(--radius-panel)] p-6 text-white sm:p-10 lg:sticky lg:top-36 lg:self-start">
             <img src="/img/logo-full.webp" alt="Bharat Fund Axis Logo" width="720" height="480" loading="lazy" className="absolute -right-16 -top-10 w-64 rounded-full opacity-10" />
             <AnimatePresence mode="wait" initial={false}>
               <m.div key={n.label} {...fade} className="relative">
@@ -125,7 +125,7 @@ function Decisions() {
         <SectionHead eyebrow={DECISIONS.eyebrow} title={DECISIONS.title} />
         <ul className="mt-12 grid gap-6 md:grid-cols-2">
           {DECISIONS.items.map((d) => (
-            <li key={d.q} className="reveal flex flex-col rounded-[var(--radius-panel)] border border-line p-7 sm:p-8">
+            <li key={d.q} className="reveal flex flex-col rounded-[var(--radius-panel)] border border-line p-6 sm:p-8">
               <span className="tag self-start">{d.tag}</span>
               <h3 className="mt-4 font-display text-2xl">{d.q}</h3>
               <p className="mt-3 flex-1">{d.answer}</p>
@@ -148,12 +148,12 @@ function Difference() {
       <div className="wrap">
         <SectionHead eyebrow={DIFFERENCE.eyebrow} title={DIFFERENCE.title} />
         <div className="mt-12 grid gap-6 md:grid-cols-2">
-          <div className="reveal rounded-[var(--radius-panel)] border border-dashed border-[#c9cfdc] bg-white/50 p-8">
+          <div className="reveal rounded-[var(--radius-panel)] border border-dashed border-[#c9cfdc] bg-white/50 p-6 sm:p-8">
             <p className="flex items-center gap-2 text-xs font-semibold tracking-wide text-[#8a1c12]"><Icon name="close" size={16} />{typical.tag}</p>
             <h3 className="mt-4 font-display text-2xl text-slate">{typical.title}</h3>
             <p className="mt-3">{typical.copy}</p>
           </div>
-          <div className="axis-field on-dark reveal rounded-[var(--radius-panel)] p-8 text-white">
+          <div className="axis-field on-dark reveal rounded-[var(--radius-panel)] p-6 text-white sm:p-8">
             <p className="flex items-center gap-2 text-xs font-semibold tracking-wide text-gold"><Icon name="check" size={16} />{ours.tag}</p>
             <h3 className="mt-4 font-display text-2xl text-white">{ours.title}</h3>
             <p className="mt-3 text-mist">{ours.copy}</p>

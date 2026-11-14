@@ -21,7 +21,7 @@ export default function BannerCarousel() {
     <section
       aria-roledescription="carousel"
       aria-label="Funding Schemes"
-      className="relative mx-auto w-full max-w-[25rem]"
+      className="relative mx-auto w-full max-w-[22rem] sm:max-w-[25rem]"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       onFocus={() => setPaused(true)}
@@ -54,7 +54,7 @@ export default function BannerCarousel() {
         </Link>
       </div>
       <div className="mt-4 flex items-center justify-between">
-        <div className="flex gap-2" role="group" aria-label="Choose slide">
+        <div className="-ml-2 flex" role="group" aria-label="Choose slide">
           {BANNERS.map((x, n) => (
             <button
               key={x.image}
@@ -62,17 +62,17 @@ export default function BannerCarousel() {
               onClick={() => setI(n)}
               aria-label={`Slide ${n + 1}: ${x.alt}`}
               aria-current={n === i || undefined}
-              className="grid h-6 w-8 place-items-center"
+              className="grid size-11 place-items-center"
             >
               <span className={`h-1 rounded-full transition-all ${n === i ? 'w-8 bg-gold' : 'w-4 bg-white/30'}`} />
             </button>
           ))}
         </div>
         <div className="flex gap-2">
-          <button type="button" onClick={() => go(-1)} aria-label="Previous slide" className="grid size-10 place-items-center rounded-full text-white ring-1 ring-white/20 hover:ring-gold">
+          <button type="button" onClick={() => go(-1)} aria-label="Previous slide" className="grid size-11 place-items-center rounded-full text-white ring-1 ring-white/20 transition-colors hover:ring-gold active:bg-white/10">
             <Icon name="chevronLeft" size={18} />
           </button>
-          <button type="button" onClick={() => go(1)} aria-label="Next slide" className="grid size-10 place-items-center rounded-full text-white ring-1 ring-white/20 hover:ring-gold">
+          <button type="button" onClick={() => go(1)} aria-label="Next slide" className="grid size-11 place-items-center rounded-full text-white ring-1 ring-white/20 transition-colors hover:ring-gold active:bg-white/10">
             <Icon name="chevronRight" size={18} />
           </button>
         </div>

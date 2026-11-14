@@ -15,34 +15,34 @@ const fade = { initial: { opacity: 0, y: 10 }, animate: { opacity: 1, y: 0 }, ex
 
 function Hero() {
   return (
-    <section className="axis-field on-dark relative overflow-hidden pb-20 pt-36 text-white lg:pb-28 lg:pt-44">
+    <section className="axis-field on-dark relative overflow-hidden pb-14 pt-32 text-white sm:pb-20 sm:pt-36 lg:pb-28 lg:pt-44">
       {/* Background glow drifts slowly and parallaxes with scroll (desktop only, see index.css). */}
       <div aria-hidden="true" className="parallax absolute inset-x-0 -top-40 h-[48rem]">
         <div className="glow -right-48 top-0 size-[46rem]" />
       </div>
       {/* The axis: one gold vertical line the hero copy hangs from. */}
       <div aria-hidden="true" className="enter enter-fade absolute inset-y-0 left-[max(1rem,calc(50%-37rem))] w-px bg-gradient-to-b from-transparent via-gold/70 to-gold/10" />
-      <div className="wrap relative grid items-center gap-14 lg:grid-cols-[1.2fr_0.8fr]">
-        <div className="pl-5 sm:pl-8">
-          <p className="eyebrow enter mb-7">{HERO.eyebrow}</p>
+      <div className="wrap relative grid items-center gap-12 lg:grid-cols-[1.2fr_0.8fr] lg:gap-14">
+        <div className="pl-4 sm:pl-8">
+          <p className="eyebrow enter mb-5 sm:mb-7">{HERO.eyebrow}</p>
           <h1 className="display-xl enter text-white" style={{ '--d': '0.08s' }}>
             {HERO.titleTop}
             <span className="enter mt-2 block text-gold-pale" style={{ '--d': '0.2s' }}>{HERO.titleBottom}</span>
           </h1>
-          <p className="lede enter mt-7 text-mist" style={{ '--d': '0.32s' }}>{HERO.copy}</p>
-          <div className="enter enter-scale mt-10 flex flex-wrap gap-3" style={{ '--d': '0.44s' }}>
+          <p className="lede enter mt-5 text-mist sm:mt-7" style={{ '--d': '0.32s' }}>{HERO.copy}</p>
+          <div className="enter enter-scale cta-row mt-8 sm:mt-10" style={{ '--d': '0.44s' }}>
             {HERO.ctas.map((c, i) => (
               <Link key={c.label} to={c.href} className={`btn ${i === 0 ? 'btn-gold' : 'btn-ghost'}`}>
                 {c.label}
               </Link>
             ))}
           </div>
-          <dl className="enter mt-14 grid max-w-md grid-cols-2 border-t border-white/15 pt-7" style={{ '--d': '0.56s' }}>
+          <dl className="enter mt-10 grid max-w-md grid-cols-2 gap-4 border-t border-white/15 pt-6 sm:mt-14 sm:pt-7" style={{ '--d': '0.56s' }}>
             {HERO.stats.map((s) => (
               <div key={s.label}>
                 <dt className="sr-only">{s.label}</dt>
-                <dd className="font-display text-4xl text-gold tabular-nums sm:text-5xl"><CountUp value={s.value} /></dd>
-                <dd className="mt-1 text-sm text-mist">{s.label}</dd>
+                <dd className="font-display text-[2.35rem] leading-none text-gold tabular-nums sm:text-5xl"><CountUp value={s.value} /></dd>
+                <dd className="mt-2 text-sm leading-snug text-mist">{s.label}</dd>
               </div>
             ))}
           </dl>
@@ -88,9 +88,9 @@ function Framework() {
     <section className="section">
       <div className="wrap">
         <SectionHead eyebrow={f.eyebrow} title={f.title} copy={f.copy} />
-        <ol className="reveal mt-14 grid grid-cols-2 gap-px overflow-hidden rounded-[var(--radius-card)] border border-line bg-line sm:grid-cols-5">
+        <ol className="reveal mt-10 grid grid-cols-2 sm:mt-14 gap-px overflow-hidden rounded-[var(--radius-card)] border border-line bg-line sm:grid-cols-5">
           {f.phases.map((p, i) => (
-            <li key={p.name} className={`bg-white p-5 ${i === 4 ? 'col-span-2 sm:col-span-1' : ''}`}>
+            <li key={p.name} className={`bg-white p-4 sm:p-5 ${i === 4 ? 'col-span-2 sm:col-span-1' : ''}`}>
               <span className="font-display text-sm text-gold-deep">Phase {i + 1}</span>
               <p className="mt-3 font-semibold text-ink">{p.name}</p>
               <p className="text-sm">{p.desc}</p>
@@ -99,22 +99,22 @@ function Framework() {
         </ol>
 
         <div className="mt-6 grid gap-6 lg:grid-cols-[1fr_1.6fr]">
-          <div className="axis-field on-dark reveal flex flex-col justify-between rounded-[var(--radius-panel)] p-8 text-white">
+          <div className="axis-field on-dark reveal flex flex-col justify-between rounded-[var(--radius-panel)] p-6 text-white sm:p-8">
             <p className="eyebrow">{f.engine.label}</p>
-            <div className="my-10">
-              <p className="font-display text-6xl text-gold tabular-nums sm:text-7xl"><CountUp value={f.engine.value} /></p>
+            <div className="my-8 sm:my-10">
+              <p className="font-display text-[3.25rem] leading-none text-gold tabular-nums sm:text-7xl"><CountUp value={f.engine.value} /></p>
               <p className="mt-3 text-lg text-white">{f.engine.text}</p>
             </div>
             <p className="flex items-center gap-2 text-sm text-mist">
               <Icon name="shield" size={18} className="text-gold" /> {f.engine.foot}
             </p>
           </div>
-          <dl className="reveal grid grid-cols-1 gap-px overflow-hidden rounded-[var(--radius-panel)] border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
+          <dl className="reveal grid grid-cols-2 gap-px overflow-hidden rounded-[var(--radius-panel)] border border-line bg-line lg:grid-cols-3">
             {f.metrics.map((m) => (
-              <div key={m.label} className="bg-white p-6">
-                <dt className="text-xs font-semibold tracking-wide text-gold-deep">{m.label}</dt>
-                <dd className="mt-4 font-display text-2xl text-ink tabular-nums"><CountUp value={m.value} /></dd>
-                <dd className="mt-1 text-sm">{m.text}</dd>
+              <div key={m.label} className="bg-white p-4 sm:p-6">
+                <dt className="text-[0.7rem] font-semibold tracking-wide text-gold-deep sm:text-xs">{m.label}</dt>
+                <dd className="mt-3 font-display text-xl leading-tight text-ink tabular-nums sm:mt-4 sm:text-2xl"><CountUp value={m.value} /></dd>
+                <dd className="mt-1 text-[0.8rem] leading-snug sm:text-sm">{m.text}</dd>
               </div>
             ))}
           </dl>
@@ -136,7 +136,7 @@ function Corridors() {
   const s = c.states[active]
   return (
     <section className="section border-y border-line bg-white">
-      <div className="wrap grid gap-14 lg:grid-cols-2">
+      <div className="wrap grid gap-12 lg:grid-cols-2 lg:gap-14">
         <div>
           <SectionHead eyebrow={c.eyebrow} title={c.title} copy={c.copy} />
           <p className="mt-10 flex items-center gap-2 text-sm font-semibold text-ink">
@@ -149,7 +149,7 @@ function Corridors() {
               </button>
             ))}
           </div>
-          <div {...panelProps} className="mt-6 rounded-[var(--radius-card)] border border-line bg-paper p-6">
+          <div {...panelProps} className="mt-6 rounded-[var(--radius-card)] border border-line bg-paper p-5 sm:p-6">
             <AnimatePresence mode="wait" initial={false}>
               <m.div key={s.name} {...fade}>
                 <div className="flex flex-wrap items-center gap-3">
@@ -175,7 +175,7 @@ function Corridors() {
               </li>
             ))}
           </ul>
-          <blockquote className="mt-10 border-l-2 border-gold pl-6 font-display text-xl leading-relaxed text-ink">
+          <blockquote className="mt-10 border-l-2 border-gold pl-5 font-display text-lg leading-relaxed text-ink sm:pl-6 sm:text-xl">
             “{c.quote}”
           </blockquote>
         </div>
@@ -195,15 +195,15 @@ function Ecosystem() {
             <ul className="flex flex-wrap gap-2 lg:justify-end">
               {e.pillars.map((p) => <li key={p} className="tag tag-gold">{p}</li>)}
             </ul>
-            <div className="flex flex-wrap gap-3">
+            <div className="cta-row">
               <Link to={e.ctas[0].href} className="btn btn-royal">{e.ctas[0].label}</Link>
               <Link to={e.ctas[1].href} className="btn btn-ghost">{e.ctas[1].label} <Icon name="arrow" size={18} /></Link>
             </div>
           </div>
         </div>
-        <ul className="mt-14 grid gap-px overflow-hidden rounded-[var(--radius-panel)] border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
+        <ul aria-label={e.title} className="rail mt-10 grid gap-px overflow-hidden rounded-[var(--radius-panel)] border border-line bg-line sm:mt-14 sm:grid-cols-2 lg:grid-cols-3">
           {e.services.map((s) => (
-            <li key={s.title} className="reveal bg-white p-7 transition-colors hover:bg-royal-soft/40">
+            <li key={s.title} className="reveal bg-white p-6 transition-colors hover:bg-royal-soft/40 max-sm:border max-sm:border-line sm:p-7">
               <h3 className="font-display text-2xl">{s.title}</h3>
               <p className="mt-2">{s.desc}</p>
               <CheckList items={s.points} className="mt-5 text-sm" />
@@ -223,12 +223,12 @@ function Sectors() {
     <section className="axis-field on-dark section text-white">
       <div className="wrap">
         <SectionHead title={SECTORS.title} copy={SECTORS.copy} dark />
-        <div role="tablist" aria-label="Sectors" className="reveal -mx-4 mt-12 flex gap-2 overflow-x-auto px-4 pb-2 sm:mx-0 sm:flex-wrap sm:px-0">
+        <div role="tablist" aria-label="Sectors" className="reveal -mx-4 mt-10 flex snap-x gap-2 overflow-x-auto px-4 pb-2 [scrollbar-width:none] sm:mx-0 sm:mt-12 sm:flex-wrap sm:px-0">
           {SECTORS.items.map((x, i) => (
             <button
               key={x.name}
               {...tabProps(i)}
-              className={`shrink-0 rounded-full px-5 py-2.5 text-sm font-semibold transition-colors ${i === active ? 'bg-gold text-ink' : 'text-white/80 ring-1 ring-white/20 hover:text-white'}`}
+              className={`min-h-11 shrink-0 snap-start rounded-full px-5 py-2.5 text-sm font-semibold transition-colors ${i === active ? 'bg-gold text-ink' : 'text-white/80 ring-1 ring-white/20 hover:text-white'}`}
             >
               {x.name}
             </button>
@@ -236,8 +236,8 @@ function Sectors() {
         </div>
         <div {...panelProps} className="mt-8 focus-visible:outline-gold">
           <AnimatePresence mode="wait" initial={false}>
-            <m.div key={s.name} {...fade} className="grid gap-6 lg:grid-cols-[1fr_1.25fr]">
-              <div className="glass rounded-[var(--radius-panel)] p-7 sm:p-9">
+            <m.div key={s.name} {...fade} className="grid grid-cols-1 gap-6 lg:grid-cols-[1fr_1.25fr]">
+              <div className="glass rounded-[var(--radius-panel)] p-6 sm:p-9">
                 <div className="flex items-center justify-between gap-4">
                   <span className="text-sm text-mist">{s.hindiTag}</span>
                   <span className="rounded-full bg-[#1a9a5b]/20 px-3 py-1 text-xs font-semibold text-[#7ee2ad]">{s.approvalRate} Success</span>
@@ -257,14 +257,14 @@ function Sectors() {
                   ))}
                 </ul>
               </div>
-              <div>
-                <div className="rounded-[var(--radius-card)] border border-gold/40 bg-gold/10 p-6">
+              <div className="min-w-0">
+                <div className="rounded-[var(--radius-card)] border border-gold/40 bg-gold/10 p-5 sm:p-6">
                   <h3 className="font-display text-2xl text-white">{s.flagship}</h3>
                   <p className="mt-1 text-mist">Official government scheme backing for {s.name} ventures via BharatFundAxis digital portal.</p>
                   <Link to="/schemes-grants" className="btn btn-gold mt-5">Check Eligibility Now</Link>
                 </div>
                 <h3 className="mt-8 font-sans text-base font-semibold text-white">लोकप्रिय Capital Schemes for {s.name}</h3>
-                <ul className="mt-4 grid gap-3 sm:grid-cols-2">
+                <ul aria-label={`Schemes for ${s.name}`} className="rail mt-4 grid gap-3 sm:grid-cols-2">
                   {s.schemes.map((x) => (
                     <li key={x.title} className="glass group flex flex-col rounded-[var(--radius-card)] p-5 transition-[transform,background-color,border-color] duration-300 hover:-translate-y-1 hover:border-gold/40 hover:bg-white/[0.09]">
                       <p className="text-xs text-mist">SANCTION UP TO</p>
@@ -272,7 +272,7 @@ function Sectors() {
                       <p className="mt-3 font-semibold text-white">{x.title}</p>
                       <p className="text-xs text-gold/90">{x.tag}</p>
                       <p className="mt-2 flex-1 text-sm text-mist">{x.desc}</p>
-                      <Link to="/schemes-grants" className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-white hover:text-gold">
+                      <Link to="/schemes-grants" className="-mb-2 mt-2 inline-flex min-h-11 items-center gap-1.5 text-sm font-semibold text-white hover:text-gold">
                         Explore Scheme <Icon name="arrow" size={16} />
                       </Link>
                     </li>
@@ -293,16 +293,16 @@ function SovereignSchemes() {
     <section className="section">
       <div className="wrap">
         <SectionHead eyebrow={d.eyebrow} title={d.title} copy={d.copy} />
-        <ul className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        <ul aria-label={d.eyebrow} className="rail mt-10 grid gap-5 sm:mt-14 md:grid-cols-2 lg:grid-cols-3">
           {d.items.map((s) => (
-            <li key={s.title} className="card reveal group flex flex-col p-7">
+            <li key={s.title} className="card reveal group flex flex-col p-6 sm:p-7">
               <p className="text-sm text-gold-deep">{s.fullName}</p>
-              <h3 className="mt-1 font-display text-3xl">{s.title}</h3>
+              <h3 className="mt-1 font-display text-[1.7rem] leading-tight sm:text-3xl">{s.title}</h3>
               <p className="mt-3 flex-1">{s.desc}</p>
               <ul className="mt-5 flex flex-wrap gap-2">
                 {s.tags.map((t) => <li key={t} className="tag">{t}</li>)}
               </ul>
-              <Link to="/schemes-grants" className="mt-6 inline-flex items-center gap-2 font-semibold text-royal group-hover:gap-3">
+              <Link to="/schemes-grants" className="-mb-2 mt-4 inline-flex min-h-11 items-center gap-2 font-semibold text-royal group-hover:gap-3">
                 {s.cta} <Icon name="arrow" size={18} />
               </Link>
             </li>
@@ -320,13 +320,13 @@ function Roadmap() {
   const r = ROADMAP
   return (
     <section className="section border-y border-line bg-white">
-      <div className="wrap grid gap-14 lg:grid-cols-[0.9fr_1.1fr]">
+      <div className="wrap grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-14">
         <div className="lg:sticky lg:top-36 lg:self-start">
           <SectionHead eyebrow={r.eyebrow} title={r.title} copy={r.copy} />
         </div>
-        <ol className="relative border-l border-gold/50 pl-8 sm:pl-12">
+        <ol className="relative ml-4 border-l border-gold/50 pl-8 sm:ml-0 sm:pl-12">
           {r.steps.map((s, i) => (
-            <li key={s.title} className="reveal reveal-left relative pb-12 last:pb-0">
+            <li key={s.title} className="reveal reveal-left relative pb-10 last:pb-0 sm:pb-12">
               <span className="absolute -left-[calc(2rem+1.1rem)] top-0 grid size-9 place-items-center rounded-full bg-ink font-display text-sm text-gold sm:-left-[calc(3rem+1.1rem)]">
                 {i + 1}
               </span>
@@ -353,11 +353,12 @@ function Dispatches() {
           <SectionHead eyebrow={d.eyebrow} title={d.title} />
           <Link to="/market-suchna" className="btn btn-ghost">{d.cta} <Icon name="arrow" size={18} /></Link>
         </div>
-        <div className="mt-12 grid gap-6 lg:grid-cols-[1.4fr_1fr]">
+        <div className="mt-10 grid gap-6 sm:mt-12 lg:grid-cols-[1.4fr_1fr]">
           <Link to="/market-suchna" className="group reveal reveal-clip relative block overflow-hidden rounded-[var(--radius-panel)] bg-ink">
-            <img src={d.featured.image} alt={d.featured.alt} width="960" height="960" loading="lazy" className="aspect-[4/3] w-full object-cover opacity-70 transition-transform duration-700 group-hover:scale-[1.03] lg:aspect-auto lg:h-full" />
-            <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/40 to-transparent" />
-            <div className="absolute inset-x-0 bottom-0 p-7 sm:p-9">
+            {/* Phones: image above the copy (the artwork carries its own text). Desktop: copy overlays the image. */}
+            <img src={d.featured.image} alt={d.featured.alt} width="960" height="960" loading="lazy" className="aspect-[16/10] w-full object-cover transition-transform duration-700 group-hover:scale-[1.03] lg:aspect-auto lg:h-full lg:opacity-70" />
+            <div className="absolute inset-0 hidden bg-gradient-to-t from-ink via-ink/40 to-transparent lg:block" />
+            <div className="p-6 sm:p-9 lg:absolute lg:inset-x-0 lg:bottom-0">
               <p className="text-sm text-gold">{d.featured.meta}</p>
               <h3 className="mt-2 font-display text-[clamp(1.5rem,3vw,2.3rem)] text-white">{d.featured.title}</h3>
               <p className="mt-3 max-w-xl text-mist">{d.featured.copy}</p>
@@ -366,7 +367,7 @@ function Dispatches() {
           <ul className="grid gap-4">
             {d.items.map((a) => (
               <li key={a.title}>
-                <Link to="/market-suchna" className="card reveal group grid grid-cols-[6.5rem_1fr] gap-4 p-3 sm:grid-cols-[8rem_1fr]">
+                <Link to="/market-suchna" className="card reveal group grid grid-cols-[5.5rem_1fr] gap-3.5 p-3 min-[400px]:grid-cols-[6.5rem_1fr] sm:grid-cols-[8rem_1fr] sm:gap-4">
                   <img src={a.image} alt={a.title} width="256" height="256" loading="lazy" className="aspect-square w-full rounded-lg object-cover" />
                   <div className="py-1 pr-2">
                     <p className="text-xs font-semibold tracking-wide text-gold-deep">{a.category}</p>
@@ -398,7 +399,7 @@ function Faq() {
                 type="button"
                 aria-pressed={c === cat}
                 onClick={() => setCat(c)}
-                className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${c === cat ? 'bg-ink text-white' : 'bg-paper text-ink hover:bg-royal-soft'}`}
+                className={`min-h-11 rounded-full px-4 py-2 text-sm font-medium transition-colors ${c === cat ? 'bg-ink text-white' : 'bg-paper text-ink hover:bg-royal-soft'}`}
               >
                 {c}
               </button>
@@ -408,7 +409,7 @@ function Faq() {
             <Accordion key={cat} items={items} name="home-faq" />
           </div>
         </div>
-        <aside className="axis-field on-dark self-start rounded-[var(--radius-panel)] p-8 text-white lg:sticky lg:top-36">
+        <aside className="axis-field on-dark self-start rounded-[var(--radius-panel)] p-6 text-white sm:p-8 lg:sticky lg:top-36">
           <p className="eyebrow">{FAQ.desk.eyebrow}</p>
           <h3 className="display-md mt-5 text-white">{FAQ.desk.title}</h3>
           <p className="mt-3 text-mist">{FAQ.desk.copy}</p>
@@ -428,7 +429,7 @@ function Knowledge() {
           <SectionHead eyebrow={k.eyebrow} title={k.title} />
           <Link to="/market-suchna" className="btn btn-ghost">{k.cta} <Icon name="arrow" size={18} /></Link>
         </div>
-        <ul className="mt-12 grid gap-6 md:grid-cols-3">
+        <ul aria-label={k.eyebrow} className="rail mt-10 grid gap-6 sm:mt-12 md:grid-cols-3">
           {k.items.map((a) => (
             <li key={a.title} className="reveal">
               <Link to="/market-suchna" className="group block">
@@ -455,9 +456,9 @@ function Knowledge() {
 export function FinalCta() {
   const f = FINAL_CTA
   return (
-    <section className="pb-20 lg:pb-28">
+    <section className="pb-14 sm:pb-20 lg:pb-28">
       <div className="wrap">
-        <div className="axis-field on-dark reveal group relative isolate overflow-hidden rounded-[var(--radius-panel)] px-6 py-14 text-center text-white sm:px-12 lg:py-20">
+        <div className="axis-field on-dark reveal group relative isolate overflow-hidden rounded-[var(--radius-panel)] px-5 py-12 text-center text-white sm:px-12 sm:py-14 lg:py-20">
           <div aria-hidden="true" className="glow -left-40 -top-56 -z-10 size-[36rem]" />
           <div aria-hidden="true" className="absolute inset-x-0 top-0 h-px scale-x-50 bg-gradient-to-r from-transparent via-gold to-transparent transition-transform duration-700 group-hover:scale-x-100" />
           <p className="eyebrow justify-center">{f.eyebrow}</p>
@@ -465,7 +466,7 @@ export function FinalCta() {
             {f.title[0]} <span className="sm:block">{f.title[1]}</span>
           </h2>
           <p className="lede mx-auto mt-5 text-mist">{f.copy}</p>
-          <div className="mt-9 flex flex-wrap justify-center gap-3">
+          <div className="cta-row justify-center mt-8 sm:mt-9">
             <Link to={f.ctas[0].href} className="btn btn-gold">{f.ctas[0].label}</Link>
             <Link to={f.ctas[1].href} className="btn btn-ghost">{f.ctas[1].label}</Link>
           </div>

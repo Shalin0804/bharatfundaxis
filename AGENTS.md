@@ -38,6 +38,13 @@ Pages are prerendered to static HTML at build time (`scripts/prerender.js`) and 
     once by `src/lib/reveal.js`; stats use `<CountUp value>` (renders the exact source string server-side).
   - Keyframes use `backwards` fill so hover transforms still work; don't add Tailwind `transition-*` to `.card`, it
     overrides the lift transition. Keep motion transform/opacity only and respect reduced motion.
+- Mobile-first: style for phones first, then add `sm:`/`lg:`. Verified at 320–430, 768, 1024, 1440 with no overflow.
+  - Fluid headings via `.display-*` (clamp). Section rhythm in `.section`. Button groups use `.cta-row` (stacked on phones).
+  - Long card lists use `.rail` (swipe row with peek on phones, normal grid from 640px). A rail inside a grid column
+    needs `min-w-0` (or `grid-cols-1`) on that column or it widens the page.
+  - Tap targets ≥ 44px (`min-h-11`). Inputs stay 16px (no iOS zoom). Backdrop blur, float, drift and parallax are
+    desktop-only.
+  - Don't float elements inside `Dialog`; floats squeeze the content beside them on narrow screens.
 - Design tokens are in `src/index.css` (`@theme`). Gold is reserved for the axis motif, key figures and primary CTAs.
 - Accessibility floor: keyboard focus visible, ARIA tabs via `useTabs`, native `<details>`/`<dialog>`, reduced motion respected.
 - Secrets only via env vars (`.env.example`); never commit keys.

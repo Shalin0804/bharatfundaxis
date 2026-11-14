@@ -3,9 +3,9 @@ import { NAV } from '../data/site.js'
 
 export default function NotFound() {
   return (
-    <section className="axis-field on-dark flex min-h-[80vh] items-center pb-20 pt-40 text-white">
+    <section className="axis-field on-dark flex min-h-[80vh] items-center pb-16 pt-32 text-white sm:pb-20 sm:pt-40">
       <div className="wrap">
-        <p className="font-display text-8xl text-gold">404</p>
+        <p className="font-display text-7xl text-gold sm:text-8xl">404</p>
         <h1 className="display-lg mt-4 text-white">This page doesn’t exist</h1>
         <p className="lede mt-4 text-mist">The link may be old or mistyped. Pick a section below.</p>
         <ul className="mt-8 flex flex-wrap gap-3">

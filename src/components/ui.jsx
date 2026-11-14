@@ -69,7 +69,7 @@ export function Accordion({ items, name, dark = false }) {
       {items.map((item, i) => (
         <details key={item.q} name={name} className="group" open={i === 0 ? true : undefined}>
           <summary
-            className={`flex cursor-pointer list-none items-start justify-between gap-6 py-5 text-left [&::-webkit-details-marker]:hidden ${dark ? 'text-white' : 'text-ink'}`}
+            className={`flex cursor-pointer list-none items-start justify-between gap-4 py-5 text-left sm:gap-6 [&::-webkit-details-marker]:hidden ${dark ? 'text-white' : 'text-ink'}`}
           >
             <h3 className="font-sans text-base font-semibold leading-snug sm:text-lg">{item.q}</h3>
             <span
@@ -78,7 +78,7 @@ export function Accordion({ items, name, dark = false }) {
               <Icon name="plus" size={16} />
             </span>
           </summary>
-          <p className={`max-w-3xl pb-6 pr-12 ${dark ? 'text-mist' : ''}`}>{item.a}</p>
+          <p className={`max-w-3xl pb-6 pr-2 sm:pr-12 ${dark ? 'text-mist' : ''}`}>{item.a}</p>
         </details>
       ))}
     </div>
@@ -97,10 +97,10 @@ export function JsonLd({ path, faqs }) {
 
 export function Breadcrumbs({ label }) {
   return (
-    <nav aria-label="Breadcrumb" className="mb-8 text-sm">
+    <nav aria-label="Breadcrumb" className="mb-6 text-sm sm:mb-8">
       <ol className="flex flex-wrap items-center gap-2 text-mist">
         <li>
-          <Link to="/" className="hover:text-white">Home</Link>
+          <Link to="/" className="-my-2 inline-block py-2 hover:text-white">Home</Link>
         </li>
         <li aria-hidden="true">/</li>
         <li aria-current="page" className="text-white">{label}</li>
@@ -113,23 +113,23 @@ export function Breadcrumbs({ label }) {
 export function PageHero({ crumb, eyebrow, title, copy, ctas = [], aside, children }) {
   const [a, b] = title
   return (
-    <section className="axis-field on-dark relative overflow-hidden pb-16 pt-32 text-white sm:pt-36 lg:pb-24">
+    <section className="axis-field on-dark relative overflow-hidden pb-12 pt-28 text-white sm:pb-16 sm:pt-36 lg:pb-24">
       <div aria-hidden="true" className="parallax absolute inset-x-0 -top-40 h-[40rem]">
         <div className="glow -right-40 top-0 size-[40rem]" />
       </div>
       <div aria-hidden="true" className="enter-fade enter absolute inset-y-0 left-[max(1rem,calc(50%-37rem))] hidden w-px lg:block bg-gradient-to-b from-transparent via-gold/60 to-transparent" />
-      <div className="wrap relative grid items-end gap-12 lg:grid-cols-[1.25fr_1fr]">
+      <div className="wrap relative grid items-end gap-10 lg:grid-cols-[1.25fr_1fr] lg:gap-12">
         <div>
           <div className="enter enter-fade">
             <Breadcrumbs label={crumb} />
           </div>
-          <p className="eyebrow enter mb-6" style={{ '--d': '0.05s' }}>{eyebrow}</p>
+          <p className="eyebrow enter mb-5 sm:mb-6" style={{ '--d': '0.05s' }}>{eyebrow}</p>
           <h1 className="display-xl enter text-white" style={{ '--d': '0.12s' }}>
             {a} <span className="text-gold-pale">{b}</span>
           </h1>
-          <p className="lede enter mt-6 text-mist" style={{ '--d': '0.26s' }}>{copy}</p>
+          <p className="lede enter mt-5 text-mist sm:mt-6" style={{ '--d': '0.26s' }}>{copy}</p>
           {ctas.length > 0 && (
-            <div className="enter enter-scale mt-9 flex flex-wrap gap-3" style={{ '--d': '0.38s' }}>
+            <div className="enter enter-scale cta-row mt-8 sm:mt-9" style={{ '--d': '0.38s' }}>
               {ctas.map((c, i) => (
                 <a key={c.label} href={c.href} className={`btn ${i === 0 ? 'btn-gold' : 'btn-ghost'}`}>
                   {c.label}
@@ -164,10 +164,11 @@ export function Dialog({ open, onClose, label, children, className = '' }) {
     >
       {open && (
         <>
+          {/* Sticky, not floated: a float would squeeze the dialog content beside it on narrow screens. */}
           <button
             type="button"
             onClick={onClose}
-            className="sticky top-3 z-10 float-right mr-3 mt-3 grid size-10 place-items-center rounded-full bg-white/90 text-ink shadow ring-1 ring-line hover:bg-paper"
+            className="sticky top-3 z-10 -mb-13 ml-auto mr-3 mt-3 grid size-10 place-items-center rounded-full bg-white/90 text-ink shadow ring-1 ring-line hover:bg-paper"
             aria-label="Close"
           >
             <Icon name="close" size={18} />

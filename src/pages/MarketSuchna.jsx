@@ -55,16 +55,16 @@ function LiveNews() {
             <span className="pulse-dot size-2 rounded-full bg-[#1a9a5b]" aria-hidden="true" /> {LIVE_NEWS.badge}
           </p>
         </div>
-        <ul className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <ul className="mt-10 grid gap-4 sm:mt-12 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
           {items.map((n) => (
             <li key={n.url + n.title} className="reveal">
-              <a href={n.url} {...ext} className="card group flex h-full flex-col overflow-hidden">
-                <img src={n.image} alt="" width="960" height="960" loading="lazy" className="aspect-[16/10] w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]" />
-                <div className="flex flex-1 flex-col p-5">
+              <a href={n.url} {...ext} className="card group grid h-full grid-cols-[5.75rem_1fr] overflow-hidden sm:flex sm:flex-col">
+                <img src={n.image} alt="" width="960" height="960" loading="lazy" className="h-full min-h-28 w-full object-cover transition-transform duration-700 group-hover:scale-[1.04] sm:aspect-[16/10] sm:h-auto sm:min-h-0" />
+                <div className="flex min-w-0 flex-1 flex-col p-4 sm:p-5">
                   <span className="tag self-start">{n.category}</span>
-                  <h3 className="mt-3 font-sans text-base font-semibold leading-snug group-hover:text-royal">{n.title}</h3>
-                  <p className="mt-2 flex-1 text-sm">{n.snippet}</p>
-                  <p className="mt-4 flex items-center justify-between text-xs font-semibold text-gold-deep">
+                  <h3 className="mt-2 font-sans text-[0.95rem] font-semibold leading-snug group-hover:text-royal sm:mt-3 sm:text-base">{n.title}</h3>
+                  <p className="mt-2 line-clamp-2 flex-1 text-sm sm:line-clamp-none">{n.snippet}</p>
+                  <p className="mt-3 flex gap-2 sm:mt-4 items-center justify-between text-xs font-semibold text-gold-deep">
                     Source: {n.source} <Icon name="external" size={15} />
                   </p>
                 </div>
@@ -117,7 +117,7 @@ function IndustryDetail({ s }) {
         <p className="mt-2 text-mist">{L.pool}<span className="font-semibold text-gold-pale">{s.capital}</span></p>
         <p className="mt-3 max-w-2xl text-mist">{s.description}</p>
       </header>
-      <div className="grid gap-8 px-6 py-8 sm:px-10 md:grid-cols-2">
+      <div className="grid gap-8 px-5 py-7 sm:px-10 sm:py-8 md:grid-cols-2">
         <dl className="space-y-4 md:col-span-2 md:grid md:grid-cols-2 md:gap-4 md:space-y-0">
           {[[L.authority, s.nodalAuthority], [L.limit, s.maxGrantCap]].map(([k, v]) => (
             <div key={k} className="rounded-[var(--radius-card)] bg-paper p-4">
@@ -193,10 +193,10 @@ export default function MarketSuchna() {
     <>
       <JsonLd path="/market-suchna" faqs={MARKET_FAQ.items} />
       <PageHero crumb="Market Suchna" eyebrow={H.eyebrow} title={H.title} copy={H.copy} ctas={H.ctas}>
-        <div className="wrap relative mt-14">
+        <div className="wrap relative mt-10 sm:mt-14">
           <dl className="grid grid-cols-2 gap-px overflow-hidden rounded-[var(--radius-card)] border border-white/10 bg-white/10 sm:grid-cols-3 lg:grid-cols-6">
             {H.stats.map((s) => (
-              <div key={s.label} className="bg-ink/80 p-5 backdrop-blur">
+              <div key={s.label} className="bg-ink/80 p-4 sm:p-5 lg:backdrop-blur">
                 <dt className="text-xs text-mist">{s.label}</dt>
                 <dd className="mt-2 font-display text-2xl text-white tabular-nums"><CountUp value={s.count} /></dd>
                 <dd className="mt-1 text-xs font-semibold text-gold">{s.trend}</dd>
@@ -209,11 +209,12 @@ export default function MarketSuchna() {
       <section id="featured-stories" className="section">
         <div className="wrap">
           <SectionHead eyebrow={FEATURED.eyebrow} title={FEATURED.title} />
-          <div className="mt-12 grid gap-6 lg:grid-cols-[1.5fr_1fr]">
-            <a href={cover.url} {...ext} className="group reveal reveal-clip relative block min-h-[26rem] overflow-hidden rounded-[var(--radius-panel)] bg-ink">
-              <img src={cover.image} alt={cover.alt} width="960" height="960" loading="lazy" className="absolute inset-0 size-full object-cover opacity-60 transition-transform duration-700 group-hover:scale-[1.03]" />
-              <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/50 to-transparent" />
-              <div className="absolute inset-x-0 bottom-0 p-7 sm:p-10">
+          <div className="mt-10 grid gap-6 sm:mt-12 lg:grid-cols-[1.5fr_1fr]">
+            <a href={cover.url} {...ext} className="group reveal reveal-clip relative block overflow-hidden rounded-[var(--radius-panel)] bg-ink lg:min-h-[26rem]">
+              {/* Phones: the cover art (which has its own lettering) sits above the copy instead of under it. */}
+              <img src={cover.image} alt={cover.alt} width="960" height="960" loading="lazy" className="aspect-[16/10] w-full object-cover transition-transform duration-700 group-hover:scale-[1.03] lg:absolute lg:inset-0 lg:aspect-auto lg:size-full lg:opacity-60" />
+              <div className="absolute inset-0 hidden bg-gradient-to-t from-ink via-ink/50 to-transparent lg:block" />
+              <div className="relative p-6 sm:p-10 lg:absolute lg:inset-x-0 lg:bottom-0">
                 <p className="text-sm text-gold">{cover.meta}</p>
                 <h3 className="mt-3 font-display text-[clamp(1.5rem,3vw,2.4rem)] text-white">{cover.title}</h3>
                 <p className="mt-3 max-w-2xl text-mist">{cover.copy}</p>
@@ -225,7 +226,7 @@ export default function MarketSuchna() {
             <ul className="grid gap-4">
               {FEATURED.stories.map((s) => (
                 <li key={s.title} className="reveal">
-                  <a href={s.url} {...ext} className="card group block h-full p-6">
+                  <a href={s.url} {...ext} className="card group block h-full p-5 sm:p-6">
                     <p className="text-xs font-semibold tracking-wide text-gold-deep">{s.category} • {s.date}</p>
                     <h3 className="mt-2 font-display text-xl group-hover:text-royal">{s.title}</h3>
                     <p className="mt-2 text-sm">{s.excerpt}</p>
@@ -261,7 +262,7 @@ export default function MarketSuchna() {
       <section className="section">
         <div className="wrap">
           <SectionHead eyebrow={INDUSTRIES.eyebrow} title={INDUSTRIES.title} />
-          <ul className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <ul aria-label={INDUSTRIES.eyebrow} className="rail mt-10 grid gap-6 sm:mt-12 sm:grid-cols-2 lg:grid-cols-4">
             {INDUSTRIES.items.map((s) => (
               <li key={s.title} className="reveal">
                 <button type="button" onClick={() => setIndustry(s)} className="card group flex h-full w-full flex-col overflow-hidden text-left">
@@ -269,7 +270,7 @@ export default function MarketSuchna() {
                   <div className="flex flex-1 flex-col p-5">
                     <p className="text-xs font-semibold tracking-wide text-gold-deep">{s.category}</p>
                     <h3 className="mt-2 font-display text-xl">{s.title}</h3>
-                    <p className="mt-2 font-display text-3xl text-royal">{s.capital}</p>
+                    <p className="mt-2 font-display text-[1.7rem] leading-tight text-royal sm:text-3xl">{s.capital}</p>
                     <p className="mt-2 flex-1 text-sm">{s.description}</p>
                     <span className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-royal group-hover:gap-3">
                       {INDUSTRIES.cta} <Icon name="arrow" size={16} />
@@ -316,14 +317,14 @@ export default function MarketSuchna() {
             <SectionHead eyebrow={PLAYBOOKS.eyebrow} title={PLAYBOOKS.title} copy={PLAYBOOKS.copy} dark />
             <ul className="mt-10 divide-y divide-white/10 border-y border-white/10">
               {PLAYBOOKS.items.map((p) => (
-                <li key={p.title} className="grid gap-1 py-6 sm:grid-cols-[15rem_1fr] sm:gap-8">
+                <li key={p.title} className="grid gap-1 py-5 sm:grid-cols-[15rem_1fr] sm:gap-8 sm:py-6">
                   <h3 className="font-display text-xl text-white">{p.title}</h3>
                   <p className="text-mist">{p.desc}</p>
                 </li>
               ))}
             </ul>
           </div>
-          <aside className="glass self-end rounded-[var(--radius-panel)] p-8">
+          <aside className="glass self-end rounded-[var(--radius-panel)] p-6 sm:p-8">
             <p className="eyebrow">{PLAYBOOKS.summary.eyebrow}</p>
             <h3 className="display-md mt-5 text-white">{PLAYBOOKS.summary.title}</h3>
             <p className="mt-3 text-mist">{PLAYBOOKS.summary.copy}</p>
@@ -341,7 +342,7 @@ export default function MarketSuchna() {
       <section className="section">
         <div className="wrap">
           <SectionHead eyebrow={RESOURCES.eyebrow} title={RESOURCES.title} />
-          <ul className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <ul aria-label={RESOURCES.eyebrow} className="rail mt-10 grid gap-6 sm:mt-12 sm:grid-cols-2 lg:grid-cols-4">
             {RESOURCES.items.map((r) => (
               <li key={r.title} className="reveal">
                 <Link to={r.href} className="card group block h-full overflow-hidden">

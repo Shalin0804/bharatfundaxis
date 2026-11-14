@@ -85,7 +85,9 @@
   @media (min-width: 640px) { .wrap { padding-inline: 1.5rem; } }
   @media (min-width: 1024px) { .wrap { padding-inline: 2rem; } }
 
-  .section { padding-block: 4.5rem; }
+  /* Mobile-first rhythm: tighter on phones, opening up on tablets and desktop. */
+  .section { padding-block: 3.5rem; }
+  @media (min-width: 640px) { .section { padding-block: 4.75rem; } }
   @media (min-width: 1024px) { .section { padding-block: 7rem; } }
 
   /* Eyebrow: a short gold tick on the axis, then the label as the site writes it. */
@@ -97,11 +99,11 @@
   .eyebrow::before { content: ''; width: 1.75rem; height: 1px; background: currentColor; }
   .on-dark .eyebrow { color: var(--color-gold); }
 
-  .display-xl { font-size: clamp(2.35rem, 5.6vw, 4.6rem); }
-  .display-lg { font-size: clamp(2rem, 4vw, 3.35rem); }
-  .display-md { font-size: clamp(1.6rem, 2.6vw, 2.25rem); }
-  .lede { font-size: 1.0625rem; max-width: 62ch; }
-  @media (min-width: 1024px) { .lede { font-size: 1.15rem; } }
+  /* Fluid type: ~33px / 28px / 23px headings on a 320px phone, scaling to the desktop sizes. */
+  .display-xl { font-size: clamp(2.05rem, 1.25rem + 4vw, 4.6rem); }
+  .display-lg { font-size: clamp(1.75rem, 1.3rem + 2.4vw, 3.35rem); }
+  .display-md { font-size: clamp(1.45rem, 1.2rem + 1.3vw, 2.25rem); }
+  .lede { font-size: clamp(1rem, 0.95rem + 0.3vw, 1.15rem); max-width: 62ch; }
 
   .btn {
     display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
@@ -147,9 +149,17 @@
   .glass {
     background: rgb(255 255 255 / 0.06);
     border: 1px solid rgb(255 255 255 / 0.12);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
   }
+  /* Backdrop blur is costly on phones (and invisible over flat navy anyway): desktop only. */
+  @media (min-width: 1024px) {
+    .glass { backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+  }
+
+  /* CTA groups: full-width stacked buttons on phones, inline from 480px. */
+  .cta-row { display: grid; gap: 0.75rem; }
+  @media (min-width: 480px) { .cta-row { display: flex; flex-wrap: wrap; } }
+  .cta-row.justify-center { justify-content: center; }
+
 
   /* Coordinate-plane texture used on navy sections — the "axis" field. */
   .axis-field {
@@ -163,7 +173,7 @@
 
   .tag {
     display: inline-flex; align-items: center; border-radius: 999px;
-    padding: 0.2rem 0.65rem; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.03em;
+    padding: 0.25rem 0.7rem; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.03em;
     background: var(--color-royal-soft); color: var(--color-royal);
   }
   .tag-gold { background: var(--color-gold-pale); color: var(--color-gold-deep); }
@@ -179,6 +189,23 @@
 
   input[type='search']::-webkit-search-cancel-button { appearance: none; }
   .prose-legal p, .prose-legal li { max-width: 72ch; }
+}
+
+/*
+  Swipe rail: on phones a long card list becomes one row of cards with the next one peeking in
+  (scroll-snap, no JS). Unlayered so it beats the element's grid/overflow utilities; from 640px the
+  list falls back to those grid classes.
+*/
+@media (max-width: 639.98px) {
+  .rail {
+    display: grid; grid-auto-flow: column; grid-auto-columns: min(84%, 20rem); grid-template-columns: none;
+    gap: 0.875rem; overflow-x: auto; overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory; scroll-padding-inline: 1rem;
+    margin-inline: -1rem; padding: 0.25rem 1rem 1rem; scrollbar-width: none;
+    background: none; border: 0; border-radius: 0;
+  }
+  .rail::-webkit-scrollbar { display: none; }
+  .rail > * { scroll-snap-align: start; border-radius: var(--radius-card); }
 }
 
 @keyframes marquee { to { transform: translateX(-50%); } }
