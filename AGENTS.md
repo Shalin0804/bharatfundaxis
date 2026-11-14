@@ -30,6 +30,14 @@ Pages are prerendered to static HTML at build time (`scripts/prerender.js`) and 
   links or extra Devanagari weights: each Devanagari file is ~50–100 KB and delayed first paint in Lighthouse.
   `scripts/prerender.js` preloads the three hero faces.
 - Off-screen sections use `content-visibility: auto` (index.css); keep the first section of each page out of it.
+- Motion (see the "Motion system" block in `index.css`):
+  - Brand preloader is inline in `index.html` (first visit per session, 0.9–3.5 s, CSS failsafe at 5 s). It uses the
+    unmodified `/img/logo-full.webp` (same artwork as the live site's `Logo-full.PNG`) on an ivory disc.
+  - Page transitions live in `Layout.jsx` (`AnimatePresence`, scroll resets after exit).
+  - Hero entrances use `.enter` + `--d` delays; scroll reveals use `.reveal` (+ `reveal-left`, `reveal-clip`), played
+    once by `src/lib/reveal.js`; stats use `<CountUp value>` (renders the exact source string server-side).
+  - Keyframes use `backwards` fill so hover transforms still work; don't add Tailwind `transition-*` to `.card`, it
+    overrides the lift transition. Keep motion transform/opacity only and respect reduced motion.
 - Design tokens are in `src/index.css` (`@theme`). Gold is reserved for the axis motif, key figures and primary CTAs.
 - Accessibility floor: keyboard focus visible, ARIA tabs via `useTabs`, native `<details>`/`<dialog>`, reduced motion respected.
 - Secrets only via env vars (`.env.example`); never commit keys.

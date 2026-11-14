@@ -87,7 +87,7 @@ function Model() {
               <button
                 key={x.label}
                 {...tabProps(i)}
-                className={`rounded-[var(--radius-card)] p-4 text-left transition-colors ${i === active ? 'bg-ink text-white' : 'bg-white ring-1 ring-line hover:ring-ink'}`}
+                className={`rounded-[var(--radius-card)] p-4 text-left transition-[color,background-color,box-shadow,transform] duration-300 hover:-translate-y-0.5 active:scale-[0.985] ${i === active ? 'bg-ink text-white' : 'bg-white ring-1 ring-line hover:ring-ink'}`}
               >
                 <span className={`block text-[0.7rem] font-semibold tracking-wide ${i === active ? 'text-gold' : 'text-gold-deep'}`}>{x.category}</span>
                 <span className={`mt-1 block font-semibold ${i === active ? 'text-white' : 'text-ink'}`}>{x.label}</span>

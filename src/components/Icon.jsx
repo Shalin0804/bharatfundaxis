@@ -30,6 +30,7 @@ export default function Icon({ name, size = 20, className = '', title }) {
       strokeLinecap="round"
       strokeLinejoin="round"
       className={className}
+      data-icon={name}
       aria-hidden={title ? undefined : true}
       role={title ? 'img' : undefined}
     >

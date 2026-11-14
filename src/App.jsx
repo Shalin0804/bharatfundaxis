@@ -32,6 +32,7 @@ const Contact = page(() => import('./pages/Contact.jsx'))
 const Legal = page(() => import('./pages/Legal.jsx'))
 
 // Keeps <title>/description in sync on client-side navigation and handles hash scrolling.
+// Scroll-to-top on page change happens in Layout once the outgoing page has faded out.
 function RouteEffects() {
   const { pathname, hash, search } = useLocation()
   useEffect(() => {
@@ -47,8 +48,6 @@ function RouteEffects() {
         else if (tries++ < 40) setTimeout(tick, 50)
       }
       tick()
-    } else {
-      window.scrollTo(0, 0)
     }
   }, [pathname, hash, search])
   return null

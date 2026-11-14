@@ -68,7 +68,7 @@ function SchemeDetail({ s, tag }) {
 
 function SchemeCard({ s, onOpen }) {
   return (
-    <li className="card group flex flex-col p-6 transition-shadow hover:shadow-[0_24px_50px_-28px_rgb(10_24_56/0.35)]">
+    <li className="card group flex flex-col p-6">
       <p className="text-xs font-semibold tracking-wide text-gold-deep">{s.code}</p>
       <h3 className="mt-2 font-display text-[1.45rem] leading-tight">{s.title}</h3>
       <p className="mt-1 text-sm">{s.ministry}</p>
@@ -139,7 +139,7 @@ export default function SchemesGrants() {
                 <button
                   type="button"
                   onClick={() => setOpen({ s, tag: L.popularTag })}
-                  className="axis-field group flex h-full w-full flex-col rounded-[var(--radius-panel)] p-6 text-left text-white"
+                  className="axis-field group flex h-full w-full flex-col rounded-[var(--radius-panel)] p-6 text-left text-white transition-[transform,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-[0_26px_50px_-24px_rgb(10_24_56/0.55)] active:scale-[0.985]"
                 >
                   <p className="text-xs font-semibold tracking-wide text-gold">{s.category}</p>
                   <h3 className="mt-3 font-display text-2xl leading-tight text-white">{s.title}</h3>

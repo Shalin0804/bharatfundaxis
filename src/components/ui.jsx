@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router'
 import Icon from './Icon.jsx'
 import { jsonLd } from '../seo.js'
@@ -21,6 +21,45 @@ export function SectionHead({ eyebrow, title, copy, align = 'left', as: H = 'h2'
       {copy && <p className={`lede mt-5 ${align === 'center' ? 'mx-auto' : ''} ${dark ? 'text-mist' : ''}`}>{copy}</p>}
     </div>
   )
+}
+
+/**
+ * Counts the leading number of a stat up from zero when it scrolls into view, then settles on the exact
+ * source string. Server HTML and no-JS/reduced-motion visitors get the final value as-is.
+ */
+export function CountUp({ value }) {
+  const ref = useRef(null)
+  const [text, setText] = useState(value)
+  useEffect(() => {
+    const match = /^(\D*?)(\d[\d,]*(?:\.\d+)?)(.*)$/s.exec(value)
+    if (!match || !('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const [, pre, num, post] = match
+    const target = parseFloat(num.replace(/,/g, ''))
+    const dec = (num.split('.')[1] || '').length
+    const fmt = (n) =>
+      pre + (num.includes(',') ? n.toLocaleString('en-IN', { minimumFractionDigits: dec, maximumFractionDigits: dec }) : n.toFixed(dec)) + post
+    let raf
+    setText(fmt(0))
+    const io = new IntersectionObserver(([e]) => {
+      if (!e.isIntersecting) return
+      io.disconnect()
+      const t0 = performance.now()
+      const tick = (now) => {
+        const p = Math.min(1, (now - t0) / 1600)
+        if (p === 1) return setText(value)
+        setText(fmt(target * (1 - (1 - p) ** 3)))
+        raf = requestAnimationFrame(tick)
+      }
+      raf = requestAnimationFrame(tick)
+    })
+    io.observe(ref.current)
+    return () => {
+      io.disconnect()
+      cancelAnimationFrame(raf)
+      setText(value)
+    }
+  }, [value])
+  return <span ref={ref}>{text}</span>
 }
 
 /** Native <details> accordion: answers stay in the HTML for search/answer engines and work without JS. */
@@ -75,17 +114,22 @@ export function PageHero({ crumb, eyebrow, title, copy, ctas = [], aside, childr
   const [a, b] = title
   return (
     <section className="axis-field on-dark relative overflow-hidden pb-16 pt-32 text-white sm:pt-36 lg:pb-24">
-      <div aria-hidden="true" className="absolute inset-y-0 left-[max(1rem,calc(50%-37rem))] hidden w-px lg:block bg-gradient-to-b from-transparent via-gold/60 to-transparent" />
+      <div aria-hidden="true" className="parallax absolute inset-x-0 -top-40 h-[40rem]">
+        <div className="glow -right-40 top-0 size-[40rem]" />
+      </div>
+      <div aria-hidden="true" className="enter-fade enter absolute inset-y-0 left-[max(1rem,calc(50%-37rem))] hidden w-px lg:block bg-gradient-to-b from-transparent via-gold/60 to-transparent" />
       <div className="wrap relative grid items-end gap-12 lg:grid-cols-[1.25fr_1fr]">
         <div>
-          <Breadcrumbs label={crumb} />
-          <p className="eyebrow mb-6">{eyebrow}</p>
-          <h1 className="display-xl text-white">
+          <div className="enter enter-fade">
+            <Breadcrumbs label={crumb} />
+          </div>
+          <p className="eyebrow enter mb-6" style={{ '--d': '0.05s' }}>{eyebrow}</p>
+          <h1 className="display-xl enter text-white" style={{ '--d': '0.12s' }}>
             {a} <span className="text-gold-pale">{b}</span>
           </h1>
-          <p className="lede mt-6 text-mist">{copy}</p>
+          <p className="lede enter mt-6 text-mist" style={{ '--d': '0.26s' }}>{copy}</p>
           {ctas.length > 0 && (
-            <div className="mt-9 flex flex-wrap gap-3">
+            <div className="enter enter-scale mt-9 flex flex-wrap gap-3" style={{ '--d': '0.38s' }}>
               {ctas.map((c, i) => (
                 <a key={c.label} href={c.href} className={`btn ${i === 0 ? 'btn-gold' : 'btn-ghost'}`}>
                   {c.label}
@@ -94,7 +138,7 @@ export function PageHero({ crumb, eyebrow, title, copy, ctas = [], aside, childr
             </div>
           )}
         </div>
-        {aside}
+        {aside && <div className="enter" style={{ '--d': '0.3s' }}>{aside}</div>}
       </div>
       {children}
     </section>

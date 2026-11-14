@@ -91,7 +91,7 @@ export default function Contact() {
                   type="button"
                   aria-pressed={p.id === pathId}
                   onClick={() => choose(p.id)}
-                  className={`flex h-full w-full flex-col rounded-[var(--radius-panel)] p-6 text-left transition-colors ${p.id === pathId ? 'axis-field text-white' : 'bg-white ring-1 ring-line hover:ring-ink'}`}
+                  className={`flex h-full w-full flex-col rounded-[var(--radius-panel)] p-6 text-left transition-[color,background-color,box-shadow,transform] duration-300 hover:-translate-y-0.5 active:scale-[0.985] ${p.id === pathId ? 'axis-field text-white' : 'bg-white ring-1 ring-line hover:ring-ink'}`}
                 >
                   <span className="flex items-center justify-between">
                     <span className={`text-xs font-semibold tracking-wide ${p.id === pathId ? 'text-gold' : 'text-gold-deep'}`}>{p.badge}</span>

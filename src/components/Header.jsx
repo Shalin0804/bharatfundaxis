@@ -67,10 +67,10 @@ function SchemesMenu({ onNavigate }) {
         {open && (
           <m.div
             id="schemes-menu"
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 6 }}
-            transition={{ duration: 0.18 }}
+            initial={{ opacity: 0, y: 10, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 6, scale: 0.98 }}
+            transition={{ duration: 0.22, ease }}
             className="absolute left-1/2 top-full w-[22rem] -translate-x-1/2 pt-3"
           >
             <ul className="rounded-[var(--radius-card)] border border-white/10 bg-ink-2/95 p-2 shadow-2xl backdrop-blur-xl">
@@ -82,10 +82,10 @@ function SchemesMenu({ onNavigate }) {
                       setOpen(false)
                       onNavigate?.()
                     }}
-                    className="flex items-center justify-between rounded-lg px-3.5 py-2.5 text-sm text-white/85 hover:bg-white/5 hover:text-white"
+                    className="group flex items-center justify-between rounded-lg px-3.5 py-2.5 text-sm text-white/85 transition-colors hover:bg-white/5 hover:text-white"
                   >
                     {l.label}
-                    <Icon name="arrow" size={15} className="text-gold" />
+                    <Icon name="arrow" size={15} className="text-gold opacity-60 group-hover:opacity-100" />
                   </Link>
                 </li>
               ))}
@@ -97,8 +97,16 @@ function SchemesMenu({ onNavigate }) {
   )
 }
 
+const ease = [0.22, 1, 0.36, 1]
+
+// Gold underline that draws in from the left on hover and stays drawn for the active page.
 const navCls = ({ isActive }) =>
-  `relative px-3 py-2 text-[0.92rem] font-medium transition-colors ${isActive ? 'text-gold' : 'text-white/80 hover:text-white'}`
+  `relative px-3 py-2 text-[0.92rem] font-medium transition-colors after:absolute after:inset-x-3 after:bottom-0.5 after:h-px after:origin-left after:bg-gold after:transition-transform after:duration-300 ${
+    isActive ? 'text-gold after:scale-x-100' : 'text-white/80 after:scale-x-0 hover:text-white hover:after:scale-x-100'
+  }`
+
+const menuList = { hidden: {}, show: { transition: { staggerChildren: 0.05, delayChildren: 0.08 } } }
+const menuItem = { hidden: { opacity: 0, y: 12 }, show: { opacity: 1, y: 0, transition: { duration: 0.35, ease } } }
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false)
@@ -125,7 +133,11 @@ export default function Header() {
       <div
         className={`transition-[background-color,box-shadow,backdrop-filter] duration-300 ${scrolled || menu ? 'bg-ink/85 shadow-[0_10px_30px_-12px_rgb(0_0_0/0.45)] backdrop-blur-xl' : 'bg-transparent'}`}
       >
-        <nav aria-label="Primary" className="wrap flex h-[4.5rem] items-center justify-between gap-6">
+        {/* Bar tightens once the page scrolls; full height while the mobile menu (anchored below it) is open. */}
+        <nav
+          aria-label="Primary"
+          className={`wrap flex items-center justify-between gap-6 transition-[height] duration-300 ${scrolled && !menu ? 'h-16' : 'h-[4.5rem]'}`}
+        >
           <Logo />
           <ul className="hidden items-center gap-1 lg:flex">
             {NAV.map((item) =>
@@ -162,20 +174,15 @@ export default function Header() {
         {menu && (
           <m.div
             id="mobile-menu"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
+            initial={{ opacity: 0, y: -16 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -12, transition: { duration: 0.2, ease: 'easeIn' } }}
+            transition={{ duration: 0.35, ease }}
             className="axis-field fixed inset-x-0 bottom-0 top-[6.75rem] overflow-y-auto lg:hidden"
           >
-            <m.ul
-              initial={{ y: 12 }}
-              animate={{ y: 0 }}
-              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-              className="wrap divide-y divide-white/10 pt-4"
-            >
+            <m.ul variants={menuList} initial="hidden" animate="show" className="wrap divide-y divide-white/10 pt-4">
               {NAV.map((item) => (
-                <li key={item.to}>
+                <m.li key={item.to} variants={menuItem}>
                   <NavLink
                     to={item.to}
                     end
@@ -197,17 +204,17 @@ export default function Header() {
                       ))}
                     </ul>
                   )}
-                </li>
+                </m.li>
               ))}
             </m.ul>
-            <div className="wrap space-y-3 py-8">
+            <m.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.35, ease }} className="wrap space-y-3 py-8">
               <Link to={APPLY_HREF} className="btn btn-gold w-full">
                 Apply Now
               </Link>
               <a href={CONTACT.phoneHref} className="btn btn-ghost w-full">
                 <Icon name="phone" size={18} /> {CONTACT.phone}
               </a>
-            </div>
+            </m.div>
           </m.div>
         )}
       </AnimatePresence>

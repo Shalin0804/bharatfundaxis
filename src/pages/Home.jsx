@@ -4,7 +4,7 @@ import { AnimatePresence, m } from 'framer-motion'
 import BannerCarousel from '../components/BannerCarousel.jsx'
 import Icon from '../components/Icon.jsx'
 import { useTabs } from '../components/Tabs.jsx'
-import { SectionHead, Accordion, JsonLd, CheckList } from '../components/ui.jsx'
+import { SectionHead, Accordion, JsonLd, CheckList, CountUp } from '../components/ui.jsx'
 import { PARTNERS } from '../data/site.js'
 import {
   HERO, FRAMEWORK, CORRIDORS, ECOSYSTEM, SECTORS, SOVEREIGN_SCHEMES,
@@ -16,34 +16,40 @@ const fade = { initial: { opacity: 0, y: 10 }, animate: { opacity: 1, y: 0 }, ex
 function Hero() {
   return (
     <section className="axis-field on-dark relative overflow-hidden pb-20 pt-36 text-white lg:pb-28 lg:pt-44">
+      {/* Background glow drifts slowly and parallaxes with scroll (desktop only, see index.css). */}
+      <div aria-hidden="true" className="parallax absolute inset-x-0 -top-40 h-[48rem]">
+        <div className="glow -right-48 top-0 size-[46rem]" />
+      </div>
       {/* The axis: one gold vertical line the hero copy hangs from. */}
-      <div aria-hidden="true" className="absolute inset-y-0 left-[max(1rem,calc(50%-37rem))] w-px bg-gradient-to-b from-transparent via-gold/70 to-gold/10" />
+      <div aria-hidden="true" className="enter enter-fade absolute inset-y-0 left-[max(1rem,calc(50%-37rem))] w-px bg-gradient-to-b from-transparent via-gold/70 to-gold/10" />
       <div className="wrap relative grid items-center gap-14 lg:grid-cols-[1.2fr_0.8fr]">
         <div className="pl-5 sm:pl-8">
-          <p className="eyebrow mb-7">{HERO.eyebrow}</p>
-          <h1 className="display-xl text-white">
+          <p className="eyebrow enter mb-7">{HERO.eyebrow}</p>
+          <h1 className="display-xl enter text-white" style={{ '--d': '0.08s' }}>
             {HERO.titleTop}
-            <span className="mt-2 block text-gold-pale">{HERO.titleBottom}</span>
+            <span className="enter mt-2 block text-gold-pale" style={{ '--d': '0.2s' }}>{HERO.titleBottom}</span>
           </h1>
-          <p className="lede mt-7 text-mist">{HERO.copy}</p>
-          <div className="mt-10 flex flex-wrap gap-3">
+          <p className="lede enter mt-7 text-mist" style={{ '--d': '0.32s' }}>{HERO.copy}</p>
+          <div className="enter enter-scale mt-10 flex flex-wrap gap-3" style={{ '--d': '0.44s' }}>
             {HERO.ctas.map((c, i) => (
               <Link key={c.label} to={c.href} className={`btn ${i === 0 ? 'btn-gold' : 'btn-ghost'}`}>
                 {c.label}
               </Link>
             ))}
           </div>
-          <dl className="mt-14 grid max-w-md grid-cols-2 border-t border-white/15 pt-7">
+          <dl className="enter mt-14 grid max-w-md grid-cols-2 border-t border-white/15 pt-7" style={{ '--d': '0.56s' }}>
             {HERO.stats.map((s) => (
               <div key={s.label}>
                 <dt className="sr-only">{s.label}</dt>
-                <dd className="font-display text-4xl text-gold sm:text-5xl">{s.value}</dd>
+                <dd className="font-display text-4xl text-gold tabular-nums sm:text-5xl"><CountUp value={s.value} /></dd>
                 <dd className="mt-1 text-sm text-mist">{s.label}</dd>
               </div>
             ))}
           </dl>
         </div>
-        <BannerCarousel />
+        <div className="enter enter-fade" style={{ '--d': '0.3s' }}>
+          <BannerCarousel />
+        </div>
       </div>
     </section>
   )
@@ -96,7 +102,7 @@ function Framework() {
           <div className="axis-field on-dark reveal flex flex-col justify-between rounded-[var(--radius-panel)] p-8 text-white">
             <p className="eyebrow">{f.engine.label}</p>
             <div className="my-10">
-              <p className="font-display text-6xl text-gold sm:text-7xl">{f.engine.value}</p>
+              <p className="font-display text-6xl text-gold tabular-nums sm:text-7xl"><CountUp value={f.engine.value} /></p>
               <p className="mt-3 text-lg text-white">{f.engine.text}</p>
             </div>
             <p className="flex items-center gap-2 text-sm text-mist">
@@ -107,7 +113,7 @@ function Framework() {
             {f.metrics.map((m) => (
               <div key={m.label} className="bg-white p-6">
                 <dt className="text-xs font-semibold tracking-wide text-gold-deep">{m.label}</dt>
-                <dd className="mt-4 font-display text-2xl text-ink">{m.value}</dd>
+                <dd className="mt-4 font-display text-2xl text-ink tabular-nums"><CountUp value={m.value} /></dd>
                 <dd className="mt-1 text-sm">{m.text}</dd>
               </div>
             ))}
@@ -260,7 +266,7 @@ function Sectors() {
                 <h3 className="mt-8 font-sans text-base font-semibold text-white">लोकप्रिय Capital Schemes for {s.name}</h3>
                 <ul className="mt-4 grid gap-3 sm:grid-cols-2">
                   {s.schemes.map((x) => (
-                    <li key={x.title} className="glass flex flex-col rounded-[var(--radius-card)] p-5">
+                    <li key={x.title} className="glass group flex flex-col rounded-[var(--radius-card)] p-5 transition-[transform,background-color,border-color] duration-300 hover:-translate-y-1 hover:border-gold/40 hover:bg-white/[0.09]">
                       <p className="text-xs text-mist">SANCTION UP TO</p>
                       <p className="font-display text-3xl text-gold">{x.cap}</p>
                       <p className="mt-3 font-semibold text-white">{x.title}</p>
@@ -289,7 +295,7 @@ function SovereignSchemes() {
         <SectionHead eyebrow={d.eyebrow} title={d.title} copy={d.copy} />
         <ul className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {d.items.map((s) => (
-            <li key={s.title} className="card reveal group flex flex-col p-7 transition-shadow hover:shadow-[0_24px_50px_-28px_rgb(10_24_56/0.35)]">
+            <li key={s.title} className="card reveal group flex flex-col p-7">
               <p className="text-sm text-gold-deep">{s.fullName}</p>
               <h3 className="mt-1 font-display text-3xl">{s.title}</h3>
               <p className="mt-3 flex-1">{s.desc}</p>
@@ -320,7 +326,7 @@ function Roadmap() {
         </div>
         <ol className="relative border-l border-gold/50 pl-8 sm:pl-12">
           {r.steps.map((s, i) => (
-            <li key={s.title} className="reveal relative pb-12 last:pb-0">
+            <li key={s.title} className="reveal reveal-left relative pb-12 last:pb-0">
               <span className="absolute -left-[calc(2rem+1.1rem)] top-0 grid size-9 place-items-center rounded-full bg-ink font-display text-sm text-gold sm:-left-[calc(3rem+1.1rem)]">
                 {i + 1}
               </span>
@@ -348,7 +354,7 @@ function Dispatches() {
           <Link to="/market-suchna" className="btn btn-ghost">{d.cta} <Icon name="arrow" size={18} /></Link>
         </div>
         <div className="mt-12 grid gap-6 lg:grid-cols-[1.4fr_1fr]">
-          <Link to="/market-suchna" className="group reveal relative block overflow-hidden rounded-[var(--radius-panel)] bg-ink">
+          <Link to="/market-suchna" className="group reveal reveal-clip relative block overflow-hidden rounded-[var(--radius-panel)] bg-ink">
             <img src={d.featured.image} alt={d.featured.alt} width="960" height="960" loading="lazy" className="aspect-[4/3] w-full object-cover opacity-70 transition-transform duration-700 group-hover:scale-[1.03] lg:aspect-auto lg:h-full" />
             <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/40 to-transparent" />
             <div className="absolute inset-x-0 bottom-0 p-7 sm:p-9">
@@ -451,8 +457,9 @@ export function FinalCta() {
   return (
     <section className="pb-20 lg:pb-28">
       <div className="wrap">
-        <div className="axis-field on-dark relative overflow-hidden rounded-[var(--radius-panel)] px-6 py-14 text-center text-white sm:px-12 lg:py-20">
-          <div aria-hidden="true" className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold to-transparent" />
+        <div className="axis-field on-dark reveal group relative isolate overflow-hidden rounded-[var(--radius-panel)] px-6 py-14 text-center text-white sm:px-12 lg:py-20">
+          <div aria-hidden="true" className="glow -left-40 -top-56 -z-10 size-[36rem]" />
+          <div aria-hidden="true" className="absolute inset-x-0 top-0 h-px scale-x-50 bg-gradient-to-r from-transparent via-gold to-transparent transition-transform duration-700 group-hover:scale-x-100" />
           <p className="eyebrow justify-center">{f.eyebrow}</p>
           <h2 className="display-lg mx-auto mt-5 max-w-3xl text-white">
             {f.title[0]} <span className="sm:block">{f.title[1]}</span>

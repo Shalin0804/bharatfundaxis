@@ -3,7 +3,7 @@ import { Link } from 'react-router'
 import Icon from '../components/Icon.jsx'
 import EnquiryForm from '../components/EnquiryForm.jsx'
 import AdvisoryBlock from '../components/AdvisoryBlock.jsx'
-import { PageHero, SectionHead, Accordion, JsonLd, Dialog, CheckList } from '../components/ui.jsx'
+import { PageHero, SectionHead, Accordion, JsonLd, Dialog, CheckList, CountUp } from '../components/ui.jsx'
 import {
   MARKET_HERO as H, FEATURED, LIVE_NEWS, NEWS_FEED_URL, DISPATCH, DISPATCH_FEED_URL, NOTIFICATIONS,
   INDUSTRIES, MARKET_FAQ, REPORTS, PLAYBOOKS, RESOURCES, MARKET_ADVISORY as A,
@@ -59,7 +59,7 @@ function LiveNews() {
           {items.map((n) => (
             <li key={n.url + n.title} className="reveal">
               <a href={n.url} {...ext} className="card group flex h-full flex-col overflow-hidden">
-                <img src={n.image} alt="" width="960" height="960" loading="lazy" className="aspect-[16/10] w-full object-cover" />
+                <img src={n.image} alt="" width="960" height="960" loading="lazy" className="aspect-[16/10] w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]" />
                 <div className="flex flex-1 flex-col p-5">
                   <span className="tag self-start">{n.category}</span>
                   <h3 className="mt-3 font-sans text-base font-semibold leading-snug group-hover:text-royal">{n.title}</h3>
@@ -198,7 +198,7 @@ export default function MarketSuchna() {
             {H.stats.map((s) => (
               <div key={s.label} className="bg-ink/80 p-5 backdrop-blur">
                 <dt className="text-xs text-mist">{s.label}</dt>
-                <dd className="mt-2 font-display text-2xl text-white">{s.count}</dd>
+                <dd className="mt-2 font-display text-2xl text-white tabular-nums"><CountUp value={s.count} /></dd>
                 <dd className="mt-1 text-xs font-semibold text-gold">{s.trend}</dd>
               </div>
             ))}
@@ -210,7 +210,7 @@ export default function MarketSuchna() {
         <div className="wrap">
           <SectionHead eyebrow={FEATURED.eyebrow} title={FEATURED.title} />
           <div className="mt-12 grid gap-6 lg:grid-cols-[1.5fr_1fr]">
-            <a href={cover.url} {...ext} className="group reveal relative block min-h-[26rem] overflow-hidden rounded-[var(--radius-panel)] bg-ink">
+            <a href={cover.url} {...ext} className="group reveal reveal-clip relative block min-h-[26rem] overflow-hidden rounded-[var(--radius-panel)] bg-ink">
               <img src={cover.image} alt={cover.alt} width="960" height="960" loading="lazy" className="absolute inset-0 size-full object-cover opacity-60 transition-transform duration-700 group-hover:scale-[1.03]" />
               <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/50 to-transparent" />
               <div className="absolute inset-x-0 bottom-0 p-7 sm:p-10">
@@ -265,7 +265,7 @@ export default function MarketSuchna() {
             {INDUSTRIES.items.map((s) => (
               <li key={s.title} className="reveal">
                 <button type="button" onClick={() => setIndustry(s)} className="card group flex h-full w-full flex-col overflow-hidden text-left">
-                  <img src={s.image} alt={s.title} width="960" height="960" loading="lazy" className="aspect-[16/10] w-full object-cover" />
+                  <img src={s.image} alt={s.title} width="960" height="960" loading="lazy" className="aspect-[16/10] w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]" />
                   <div className="flex flex-1 flex-col p-5">
                     <p className="text-xs font-semibold tracking-wide text-gold-deep">{s.category}</p>
                     <h3 className="mt-2 font-display text-xl">{s.title}</h3>
@@ -345,7 +345,7 @@ export default function MarketSuchna() {
             {RESOURCES.items.map((r) => (
               <li key={r.title} className="reveal">
                 <Link to={r.href} className="card group block h-full overflow-hidden">
-                  <img src={r.image} alt={r.title} width="960" height="960" loading="lazy" className="aspect-[16/10] w-full object-cover" />
+                  <img src={r.image} alt={r.title} width="960" height="960" loading="lazy" className="aspect-[16/10] w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]" />
                   <div className="p-5">
                     <h3 className="flex items-center justify-between gap-2 font-sans text-base font-semibold group-hover:text-royal">
                       {r.title} <Icon name="arrow" size={17} className="shrink-0" />

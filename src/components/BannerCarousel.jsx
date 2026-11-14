@@ -27,7 +27,7 @@ export default function BannerCarousel() {
       onFocus={() => setPaused(true)}
       onBlur={() => setPaused(false)}
     >
-      <div className="glass rounded-[var(--radius-panel)] p-2.5 shadow-[0_40px_80px_-30px_rgb(0_0_0/0.7)]">
+      <div className="glass float rounded-[var(--radius-panel)] p-2.5 shadow-[0_40px_80px_-30px_rgb(0_0_0/0.7)]">
         <div className="relative aspect-[4/5] overflow-hidden rounded-[calc(var(--radius-panel)-8px)] bg-[#f3ead9]">
           <AnimatePresence initial={false} mode="popLayout">
             <m.img
@@ -48,7 +48,7 @@ export default function BannerCarousel() {
         </div>
         <Link
           to="/contact#connection-panels"
-          className="mt-2.5 flex min-h-12 items-center justify-center gap-2 rounded-xl bg-gold px-4 py-3 text-center text-[0.8rem] font-bold tracking-wide text-ink hover:bg-[#d8b363]"
+          className="mt-2.5 flex min-h-12 items-center justify-center gap-2 rounded-xl bg-gold px-4 py-3 text-center text-[0.8rem] font-bold tracking-wide text-ink transition-colors hover:bg-[#d8b363]"
         >
           {b.cta}
         </Link>
