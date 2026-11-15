@@ -65,12 +65,12 @@ Popup image, advisory portrait. Total image weight dropped from 27 MB to 1.4 MB.
 
 | Live feature | Rebuild |
 |---|---|
-| 5 enquiry forms POSTing JSON to `/api/contact` | Same payload → Vercel function → Resend email (`api/contact.js`) |
+| 5 enquiry forms POSTing JSON to `/api/contact` | Same payload → Vercel function → email to support@bharatfundaxis.com via SMTP/Nodemailer or Resend, with reference ID (`api/contact.js`) |
 | Client validation (name/email/10-digit Indian mobile) | Same rules, Unicode names, server re-validates, honeypot, rate limit |
 | Scheme search + category filter | Same; category is now shareable in the URL |
 | Tabs, accordions, carousels, modals | Rebuilt accessibly (ARIA tabs, native `<details>`, native `<dialog>`) |
 | Live RSS (ET + Google News via rss2json) with fallback | Same sources and fallback lists |
 | Popup every 30 s | Once per session after 5 s |
 | `mailto:` / `tel:` links, Google Map embed | Same |
-| WhatsApp | Not on live site. Added at client request: every form, after validating, emails the desk then opens wa.me/<WHATSAPP_NUMBER> (src/data/site.js) with the enquiry pre-typed |
+| WhatsApp | Not on live site. Added at client request: every form, once the email is confirmed, shows the reference ID and a link to wa.me/<WHATSAPP_NUMBER> (src/data/site.js) with the enquiry and reference pre-typed; optional WhatsApp Cloud API alert to the business |
 | Social links | `href="#"` placeholders on live site — omitted |

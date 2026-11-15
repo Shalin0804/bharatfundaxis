@@ -1,10 +1,27 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, m } from 'framer-motion'
 import Icon from '../components/Icon.jsx'
 import EnquiryForm from '../components/EnquiryForm.jsx'
 import { PageHero, SectionHead, Accordion, JsonLd } from '../components/ui.jsx'
 import { CONTACT, FORM_MESSAGES_HI } from '../data/site.js'
 import { CONTACT_HERO as H, PATHS, CONTACT_FORM as F, PROCESS, PRESENCE, CONTACT_FAQ, BEGINNING } from '../data/contact.js'
+
+/** Google Maps embed, mounted only once its block nears the viewport: Chrome's lazy iframes start too early
+ *  here and the map's ~170 KB of script slows the first paint. */
+function MapEmbed() {
+  const ref = useRef(null)
+  const [show, setShow] = useState(false)
+  useEffect(() => {
+    const io = new IntersectionObserver(([e]) => e.isIntersecting && (setShow(true), io.disconnect()), { rootMargin: '300px' })
+    io.observe(ref.current)
+    return () => io.disconnect()
+  }, [])
+  return (
+    <div ref={ref} className="size-full min-h-[18rem] sm:min-h-[22rem]">
+      {show && <iframe title={PRESENCE.mapTitle} src={CONTACT.mapEmbed} referrerPolicy="no-referrer-when-downgrade" className="size-full min-h-[18rem] border-0 sm:min-h-[22rem]" />}
+    </div>
+  )
+}
 
 function Select({ id, name, label, options, defaultValue }) {
   return (
@@ -71,7 +88,7 @@ export default function Contact() {
             <p className="mt-1 text-mist">{H.studio.copy}</p>
             <dl className="mt-6 grid grid-cols-2 gap-3">
               {H.studio.desks.map((d) => (
-                <div key={d.label} className="rounded-xl bg-white/5 p-4 ring-1 ring-white/10">
+                <div key={d.label} className="rounded-[2px] bg-white/5 p-4 ring-1 ring-white/10">
                   <dt className="text-xs text-mist">{d.label}</dt>
                   <dd className="mt-1 font-semibold text-white">{d.value}</dd>
                 </div>
@@ -155,7 +172,7 @@ export default function Contact() {
           </ol>
           <ul className="mt-8 flex flex-wrap gap-3">
             {PROCESS.badges.map((b) => (
-              <li key={b} className="flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-xs font-semibold text-white">
+              <li key={b} className="flex items-center gap-2 rounded-[2px] bg-white/10 px-4 py-2 text-xs font-semibold text-white">
                 <Icon name="shield" size={15} className="text-gold" />{b}
               </li>
             ))}
@@ -187,7 +204,7 @@ export default function Contact() {
             </ul>
           </div>
           <div className="min-h-[18rem] overflow-hidden rounded-[var(--radius-panel)] bg-white ring-1 ring-line sm:min-h-[22rem]">
-            <iframe title={PRESENCE.mapTitle} src={CONTACT.mapEmbed} loading="lazy" referrerPolicy="no-referrer-when-downgrade" className="size-full min-h-[18rem] border-0 sm:min-h-[22rem]" />
+            <MapEmbed />
           </div>
         </div>
       </section>

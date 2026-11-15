@@ -14,7 +14,7 @@ const { SITE_URL } = await import(pathToFileURL(path.join(root, 'src/data/site.j
 const assets = fs.readdirSync(path.join(dist, 'assets'))
 // Only the faces the hero headline and copy render with (~86 KB). Preloading more measured worse:
 // preloads compete for bandwidth and can hold first render.
-const preloads = ['newsreader-latin-500', 'hanken-grotesk-latin-400', 'noto-sans-devanagari-devanagari-400']
+const preloads = ['newsreader-latin-400', 'hanken-grotesk-latin-400', 'noto-sans-devanagari-devanagari-400']
   .map((name) => assets.find((f) => f.startsWith(`${name}-normal-`) && f.endsWith('.woff2')))
   .filter(Boolean)
   .map((f) => `<link rel="preload" href="/assets/${f}" as="font" type="font/woff2" crossorigin>`)

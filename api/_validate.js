@@ -3,7 +3,7 @@ const NAME_RE = /^[\p{L}\p{M} .'-]{2,80}$/u // \p{M}: Devanagari matras are comb
 const EMAIL_RE = /^[^\s@]{1,64}@[^\s@]{1,190}\.[^\s@]{2,}$/
 const PHONE_RE = /^[6-9]\d{9}$/
 
-const LIMITS = { topic: 120, message: 2000, enterpriseType: 120, fundingAmount: 60, stage: 60, consultationFocus: 80, timeframe: 60 }
+const LIMITS = { topic: 120, message: 2000, enterpriseType: 120, fundingAmount: 60, stage: 60, consultationFocus: 80, timeframe: 60, source: 120 }
 
 const oneLine = (v) => v.replace(/[\r\n\t]+/g, ' ')
 const clean = (v, max) => (typeof v === 'string' ? v.replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/g, '').trim().slice(0, max) : '')

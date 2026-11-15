@@ -16,8 +16,8 @@ function VerticalIndex() {
     <ol className="glass hidden gap-1.5 rounded-[var(--radius-panel)] p-2.5 lg:grid">
       {WHAT_WE_DO.verticals.map((v, i) => (
         <li key={v.id}>
-          <a href={`#${v.id}`} className="group flex min-h-13 items-center gap-4 rounded-xl px-3 py-2 transition-colors hover:bg-white/5">
-            <span className={`grid size-10 shrink-0 place-items-center rounded-lg font-display text-lg ring-1 ring-white/15 ${TONE[i]}`}>0{i + 1}</span>
+          <a href={`#${v.id}`} className="group flex min-h-13 items-center gap-4 rounded-[2px] px-3 py-2 transition-colors hover:bg-white/5">
+            <span className={`grid size-10 shrink-0 place-items-center rounded-[2px] font-display text-lg ring-1 ring-white/15 ${TONE[i]}`}>0{i + 1}</span>
             <span className="font-semibold text-white">{v.title}</span>
             <Icon name="arrow" size={18} className="ml-auto text-gold" />
           </a>
@@ -59,7 +59,7 @@ function Vertical({ v, i }) {
     <section id={v.id} className={`section ${dark ? 'border-y border-line bg-white' : ''}`}>
       <div className="wrap grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-14">
         <div className="lg:sticky lg:top-36 lg:self-start">
-          <span aria-hidden="true" className={`reveal mb-6 grid size-14 place-items-center rounded-2xl font-display text-2xl ${TONE[i]}`}>0{i + 1}</span>
+          <span aria-hidden="true" className={`reveal mb-6 grid size-14 place-items-center rounded-[2px] font-display text-2xl ${TONE[i]}`}>0{i + 1}</span>
           <SectionHead eyebrow={d.eyebrow} title={v.title} copy={d.copy} />
         </div>
         <div className="grid content-start gap-5">
@@ -104,7 +104,7 @@ function HowWeWork() {
         <ol className="mt-10 grid gap-4 sm:mt-14 sm:grid-cols-2 lg:grid-cols-3">
           {h.steps.map((s, i) => (
             <li key={s.title} className="glass reveal group relative rounded-[var(--radius-panel)] p-6 sm:p-7">
-              <span className="grid size-10 place-items-center rounded-full bg-gold font-display text-lg text-ink transition-transform duration-500 group-hover:scale-110">{i + 1}</span>
+              <span className="grid size-10 place-items-center rounded-[2px] bg-gold font-display text-lg text-ink transition-transform duration-500 group-hover:scale-110">{i + 1}</span>
               <h3 className="mt-5 font-display text-2xl text-white">{s.title}</h3>
               <p className="mt-2 text-mist">{s.copy}</p>
             </li>

@@ -49,3 +49,28 @@ test('accepts +91 0 prefix and catches non-string honeypot', () => {
   assert.equal(validateEnquiry({ ...good, phone: '+91 09876543210' }).data.phone, '9876543210')
   assert.equal(validateEnquiry({ ...good, website: true }).spam, true)
 })
+
+test('contact handler: emails the desk and returns a reference ID only after delivery', async () => {
+  const { default: handler, makeRef } = await import('./contact.js')
+  assert.match(makeRef(), /^BFA-\d{6}-[A-HJ-NP-Z2-9]{6}$/)
+  Object.assign(process.env, { RESEND_API_KEY: 'k', CONTACT_FROM_EMAIL: 'Site <noreply@example.com>' })
+  const call = async (status, body = { ...good, elapsed: 9000 }) => {
+    const sent = []
+    globalThis.fetch = async (url, init) => { sent.push(JSON.parse(init.body)); return new Response('{}', { status }) }
+    let out
+    const res = { setHeader() {}, status(c) { return { json: (j) => (out = { c, j }) } } }
+    await handler({ method: 'POST', headers: { host: 'x', 'x-real-ip': String(Math.random()) }, body }, res)
+    return { ...out, sent }
+  }
+  const ok = await call(200)
+  assert.equal(ok.c, 200)
+  assert.match(ok.j.ref, /^BFA-/)
+  assert.deepEqual(ok.sent[0].to, ['support@bharatfundaxis.com'])
+  assert.match(ok.sent[0].subject, /^\[General Enquiry\] New website enquiry BFA-/)
+  assert.ok(ok.sent[0].text.includes('Phone: 9876543210') && ok.sent[0].text.includes(ok.j.ref))
+  const fail = await call(500)
+  assert.equal(fail.c, 502)
+  assert.equal(fail.j.success, false)
+  const bot = await call(200, { ...good, elapsed: 300 })
+  assert.equal(bot.sent.length, 0) // too fast: no email, but a normal-looking reply
+})

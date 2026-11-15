@@ -51,8 +51,8 @@ function LiveNews() {
       <div className="wrap">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <SectionHead eyebrow={LIVE_NEWS.eyebrow} title={LIVE_NEWS.title} />
-          <p className="flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-medium text-ink ring-1 ring-line">
-            <span className="pulse-dot size-2 rounded-full bg-[#1a9a5b]" aria-hidden="true" /> {LIVE_NEWS.badge}
+          <p className="flex items-center gap-2 rounded-[2px] bg-white px-4 py-2 text-sm font-medium text-ink ring-1 ring-line">
+            <span className="pulse-dot size-2 rounded-[2px] bg-[#1a9a5b]" aria-hidden="true" /> {LIVE_NEWS.badge}
           </p>
         </div>
         <ul className="mt-10 grid gap-4 sm:mt-12 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
@@ -85,7 +85,7 @@ function DispatchBar() {
     <ul className="flex shrink-0 items-center" aria-hidden={hidden || undefined}>
       {items.map((d) => (
         <li key={d.title} className="flex items-center gap-3 px-7 whitespace-nowrap text-sm">
-          <span className="rounded-sm border border-gold/40 bg-gold/15 px-2 py-0.5 text-[0.65rem] font-bold tracking-wide text-gold">{d.status}</span>
+          <span className="rounded-sm border border-gold/40 bg-gold/15 px-2 py-0.5 text-xs font-bold tracking-wide text-gold">{d.status}</span>
           <span className="font-semibold text-white">{d.title}</span>
           <span className="text-mist">• {d.source}</span>
           <span className="text-gold/50" aria-hidden="true">◆</span>
@@ -96,7 +96,7 @@ function DispatchBar() {
   return (
     <section aria-label={DISPATCH.label} className="marquee-host relative flex items-center overflow-hidden border-y-2 border-gold bg-ink py-3.5">
       <p className="relative z-10 flex shrink-0 items-center gap-2 bg-ink pl-4 pr-5 text-xs font-black tracking-[0.15em] text-gold sm:pl-6">
-        <span className="pulse-dot size-2 rounded-full bg-[#e5484d]" aria-hidden="true" />
+        <span className="pulse-dot size-2 rounded-[2px] bg-[#e5484d]" aria-hidden="true" />
         {live ? DISPATCH.label : DISPATCH.liveLabel}
       </p>
       <div className="marquee flex w-max" style={{ '--marquee-duration': '70s' }}>
@@ -192,14 +192,14 @@ export default function MarketSuchna() {
   return (
     <>
       <JsonLd path="/market-suchna" faqs={MARKET_FAQ.items} />
-      <PageHero crumb="Market Suchna" eyebrow={H.eyebrow} title={H.title} copy={H.copy} ctas={H.ctas}>
+      <PageHero tone="light" crumb="Market Suchna" eyebrow={H.eyebrow} title={H.title} copy={H.copy} ctas={H.ctas}>
         <div className="wrap relative mt-10 sm:mt-14">
-          <dl className="grid grid-cols-2 gap-px overflow-hidden rounded-[var(--radius-card)] border border-white/10 bg-white/10 sm:grid-cols-3 lg:grid-cols-6">
+          <dl className="grid grid-cols-2 border-l border-t border-ink sm:grid-cols-3 lg:grid-cols-6">
             {H.stats.map((s) => (
-              <div key={s.label} className="bg-ink/80 p-4 sm:p-5 lg:backdrop-blur">
-                <dt className="text-xs text-mist">{s.label}</dt>
-                <dd className="mt-2 font-display text-2xl text-white tabular-nums"><CountUp value={s.count} /></dd>
-                <dd className="mt-1 text-xs font-semibold text-gold">{s.trend}</dd>
+              <div key={s.label} className="border-b border-r border-ink bg-white p-4 sm:p-5">
+                <dt className="mono text-xs text-slate">{s.label}</dt>
+                <dd className="figure mt-2 text-3xl text-ink"><CountUp value={s.count} /></dd>
+                <dd className="mono mt-1 text-xs text-royal">▲ {s.trend}</dd>
               </div>
             ))}
           </dl>
@@ -330,7 +330,7 @@ export default function MarketSuchna() {
             <p className="mt-3 text-mist">{PLAYBOOKS.summary.copy}</p>
             <ul className="mt-6 flex flex-wrap gap-2">
               {PLAYBOOKS.summary.badges.map((b) => (
-                <li key={b} className="flex items-center gap-1.5 rounded-full bg-white/10 px-3 py-1 text-sm text-white">
+                <li key={b} className="flex items-center gap-1.5 rounded-[2px] bg-white/10 px-3 py-1 text-sm text-white">
                   <Icon name="check" size={15} className="text-gold" />{b}
                 </li>
               ))}

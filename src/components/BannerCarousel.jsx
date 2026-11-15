@@ -36,8 +36,7 @@ export default function BannerCarousel() {
               alt={b.alt}
               width={b.w}
               height={b.h}
-              loading={i === 0 ? 'eager' : 'lazy'}
-              fetchPriority={i === 0 ? 'high' : undefined}
+              loading="lazy"
               initial={{ opacity: 0, scale: 1.02 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0 }}
@@ -48,7 +47,7 @@ export default function BannerCarousel() {
         </div>
         <Link
           to="/contact#connection-panels"
-          className="mt-2.5 flex min-h-12 items-center justify-center gap-2 rounded-xl bg-gold px-4 py-3 text-center text-[0.8rem] font-bold tracking-wide text-ink transition-colors hover:bg-[#ddb95f]"
+          className="mt-2.5 flex min-h-12 items-center justify-center gap-2 rounded-[2px] bg-gold px-4 py-3 text-center text-[0.8rem] font-bold tracking-wide text-ink transition-colors hover:bg-[#ddb95f]"
         >
           {b.cta}
         </Link>
@@ -64,15 +63,15 @@ export default function BannerCarousel() {
               aria-current={n === i || undefined}
               className="grid size-11 place-items-center"
             >
-              <span className={`h-1 rounded-full transition-all ${n === i ? 'w-8 bg-gold' : 'w-4 bg-white/30'}`} />
+              <span className={`h-1 rounded-[2px] transition-all ${n === i ? 'w-8 bg-gold' : 'w-4 bg-white/30'}`} />
             </button>
           ))}
         </div>
         <div className="flex gap-2">
-          <button type="button" onClick={() => go(-1)} aria-label="Previous slide" className="grid size-11 place-items-center rounded-full text-white ring-1 ring-white/20 transition-colors hover:ring-gold active:bg-white/10">
+          <button type="button" onClick={() => go(-1)} aria-label="Previous slide" className="grid size-11 place-items-center rounded-[2px] text-white ring-1 ring-white/20 transition-colors hover:ring-gold active:bg-white/10">
             <Icon name="chevronLeft" size={18} />
           </button>
-          <button type="button" onClick={() => go(1)} aria-label="Next slide" className="grid size-11 place-items-center rounded-full text-white ring-1 ring-white/20 transition-colors hover:ring-gold active:bg-white/10">
+          <button type="button" onClick={() => go(1)} aria-label="Next slide" className="grid size-11 place-items-center rounded-[2px] text-white ring-1 ring-white/20 transition-colors hover:ring-gold active:bg-white/10">
             <Icon name="chevronRight" size={18} />
           </button>
         </div>

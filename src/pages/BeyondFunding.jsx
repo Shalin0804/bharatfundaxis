@@ -49,7 +49,7 @@ function Journey() {
           <div role="tablist" aria-label="Business stages" className="relative -mx-4 flex snap-x gap-1 overflow-x-auto px-4 pb-2 [scrollbar-width:none] md:mx-0 md:justify-between md:px-0">
             {JOURNEY.stages.map((st, i) => (
               <button key={st.label} {...tabProps(i)} className="group flex min-h-11 min-w-20 shrink-0 snap-start flex-col items-center gap-3 px-2 text-sm">
-                <span className={`grid size-9 place-items-center rounded-full font-display transition-colors ${i === active ? 'bg-gold text-ink' : i < active ? 'bg-white/20 text-white' : 'bg-ink-2 text-mist ring-1 ring-white/15 group-hover:ring-gold'}`}>
+                <span className={`grid size-9 place-items-center rounded-[2px] font-display transition-colors ${i === active ? 'bg-gold text-ink' : i < active ? 'bg-white/20 text-white' : 'bg-ink-2 text-mist ring-1 ring-white/15 group-hover:ring-gold'}`}>
                   {i + 1}
                 </span>
                 <span className={i === active ? 'font-semibold text-gold' : 'text-mist group-hover:text-white'}>{st.label}</span>
@@ -89,7 +89,7 @@ function Model() {
                 {...tabProps(i)}
                 className={`rounded-[var(--radius-card)] p-4 text-left transition-[color,background-color,box-shadow,transform] duration-300 hover:-translate-y-0.5 active:scale-[0.985] ${i === active ? 'bg-ink text-white' : 'bg-white ring-1 ring-line hover:ring-ink'}`}
               >
-                <span className={`block text-[0.7rem] font-semibold tracking-wide ${i === active ? 'text-gold' : 'text-gold-deep'}`}>{x.category}</span>
+                <span className={`block text-xs font-semibold tracking-wide ${i === active ? 'text-gold' : 'text-gold-deep'}`}>{x.category}</span>
                 <span className={`mt-1 block font-semibold ${i === active ? 'text-white' : 'text-ink'}`}>{x.label}</span>
               </button>
             ))}
@@ -199,7 +199,7 @@ export default function BeyondFunding() {
               <li key={c.title} className="glass rounded-[var(--radius-card)] p-5">
                 <div className="flex items-center justify-between gap-3">
                   <p className="text-xs font-semibold tracking-wide text-gold">{c.tag}</p>
-                  {c.badge && <span className="rounded-full bg-gold px-2.5 py-0.5 text-[0.7rem] font-bold text-ink">{c.badge}</span>}
+                  {c.badge && <span className="rounded-[2px] bg-gold px-2.5 py-0.5 text-xs font-bold text-ink">{c.badge}</span>}
                 </div>
                 <p className="mt-2 font-display text-xl text-white">{c.title}</p>
                 <p className="mt-1 text-sm text-mist">{c.copy}</p>

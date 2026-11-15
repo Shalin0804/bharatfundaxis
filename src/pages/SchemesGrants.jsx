@@ -22,7 +22,7 @@ function SchemeDetail({ s, tag }) {
         <p className="text-xs font-semibold tracking-wide text-gold">{tag} • {s.code}</p>
         <h2 className="display-md mt-3 text-white">{s.title}</h2>
         <p className="mt-2 text-sm text-mist">{s.ministry} • {s.nodalAgency}</p>
-        <div className="mt-6 inline-block rounded-xl bg-white/5 px-5 py-4 ring-1 ring-white/10">
+        <div className="mt-6 inline-block rounded-[2px] bg-white/5 px-5 py-4 ring-1 ring-white/10">
           <p className="text-xs font-semibold tracking-wide text-gold">{L.pool}</p>
           <p className="mt-1 font-display text-3xl text-white">{s.amount}</p>
         </div>
@@ -112,7 +112,7 @@ export default function SchemesGrants() {
         aside={
           <form role="search" onSubmit={(e) => { e.preventDefault(); document.getElementById('directory')?.scrollIntoView() }} className="glass rounded-[var(--radius-panel)] p-3">
             <label htmlFor="scheme-search" className="sr-only">Search schemes</label>
-            <div className="flex items-center gap-2 rounded-xl bg-white px-3">
+            <div className="flex items-center gap-2 rounded-[2px] bg-white px-3">
               <Icon name="search" size={20} className="shrink-0 text-slate" />
               <input
                 id="scheme-search"
@@ -123,7 +123,7 @@ export default function SchemesGrants() {
                 className="min-h-13 w-full bg-transparent py-3 text-ink outline-none placeholder:text-[#7a837f]"
               />
               {query && (
-                <button type="button" onClick={() => setQuery('')} className="shrink-0 rounded-full px-3 py-1 text-sm text-royal hover:bg-royal-soft">{H.clear}</button>
+                <button type="button" onClick={() => setQuery('')} className="shrink-0 rounded-[2px] px-3 py-1 text-sm text-royal hover:bg-royal-soft">{H.clear}</button>
               )}
             </div>
           </form>
@@ -163,7 +163,7 @@ export default function SchemesGrants() {
                 type="button"
                 aria-pressed={c === category}
                 onClick={() => setCategory(c)}
-                className={`min-h-11 shrink-0 snap-start rounded-full px-4 py-2 text-sm font-medium transition-colors ${c === category ? 'bg-ink text-white' : 'bg-white text-ink ring-1 ring-line hover:ring-ink'}`}
+                className={`min-h-11 shrink-0 snap-start rounded-[2px] px-4 py-2 text-sm font-medium transition-colors ${c === category ? 'bg-ink text-white' : 'bg-white text-ink ring-1 ring-line hover:ring-ink'}`}
               >
                 {c}
               </button>

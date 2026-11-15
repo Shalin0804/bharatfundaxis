@@ -60,7 +60,8 @@
       <p class="pl-tag">YOUR BUSINESS. OUR PRIORITY.</p>
     </div>
     <script>
-      // Shows the preloader once per session; hides it on window load (min 0.9s so the logo can land, max 3.5s).
+      // Shows the preloader once per session; hides it once the page and its fonts are ready, not on full window load
+      // (images keep loading behind it). Min 0.9s so the logo can land, max 2.5s.
       ;(function () {
         var d = document.documentElement
         d.classList.add('js')
@@ -83,8 +84,10 @@
             setTimeout(function () { p.remove() }, 700)
           }, Math.max(0, min - (Date.now() - t0)))
         }
-        addEventListener('load', finish)
-        setTimeout(finish, 3500)
+        document.addEventListener('DOMContentLoaded', function () {
+          document.fonts && document.fonts.ready ? document.fonts.ready.then(finish) : finish()
+        })
+        setTimeout(finish, 2500)
       })()
     </script>
     <div id="root"><!--app--></div>

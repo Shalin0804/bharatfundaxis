@@ -35,7 +35,7 @@ export default function Legal({ path }) {
   return (
     <>
       <JsonLd path={path} />
-      <PageHero crumb={PAGES[path].crumb} eyebrow={doc.eyebrow} title={[doc.title, '']} copy={doc.copy} />
+      <PageHero tone="light" crumb={PAGES[path].crumb} eyebrow={doc.eyebrow} title={[doc.title, '']} copy={doc.copy} />
       <div className="wrap grid gap-8 py-10 sm:py-16 lg:grid-cols-[16rem_1fr] lg:gap-12 lg:py-24">
         <nav aria-label="On this page" className="hidden lg:block">
           <ol className="sticky top-36 space-y-2 border-l border-line text-sm">

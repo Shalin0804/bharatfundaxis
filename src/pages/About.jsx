@@ -15,12 +15,12 @@ const CTAS = [
 function BrandMark() {
   return (
     <div className="relative mx-auto grid aspect-square w-[min(22rem,78vw)] place-items-center lg:mr-0">
-      <div aria-hidden="true" className="absolute inset-0 rounded-full border border-gold/30" />
+      <div aria-hidden="true" className="absolute inset-0 rounded-full border border-ink/20" />
       <div aria-hidden="true" className="absolute inset-[7%] rounded-full border border-dashed border-gold/25" />
-      <div className="float relative grid size-[78%] place-items-center rounded-full bg-paper shadow-[0_40px_80px_-30px_rgb(0_0_0/0.55)] ring-1 ring-gold/50">
+      <div className="float relative grid size-[78%] place-items-center rounded-full bg-paper shadow-[10px_10px_0_var(--color-gold)] ring-1 ring-ink">
         <img src="/img/logo-symbol.webp" alt="BharatFundAxis logo: three overlapping circles with a handshake, a rising chart and a person" width="499" height="455" className="w-[72%]" />
       </div>
-      <p className="absolute -bottom-2 text-center text-xs font-semibold tracking-[0.26em] text-gold">{TAGLINE}</p>
+      <p className="mono absolute -bottom-2 text-center text-xs tracking-[0.2em] text-gold-deep">{TAGLINE}</p>
     </div>
   )
 }
@@ -187,7 +187,7 @@ export default function About() {
   return (
     <>
       <JsonLd path="/about" />
-      <PageHero crumb="About Us" eyebrow={WELCOME.eyebrow} title={['Welcome to', 'BharatFundAxis']} copy={PROFILE_INTRO} ctas={CTAS} aside={<BrandMark />} />
+      <PageHero tone="light" crumb="About Us" eyebrow={WELCOME.eyebrow} title={['Welcome to', 'BharatFundAxis']} copy={PROFILE_INTRO} ctas={CTAS} aside={<BrandMark />} />
       <Welcome />
       <WhoWeAre />
       <LogoMeaning />

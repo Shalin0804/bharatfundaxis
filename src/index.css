@@ -4,6 +4,9 @@
    @font-face means browsers only download the Latin or Devanagari files a page actually uses. */
 @import '@fontsource/newsreader/latin-400.css';
 @import '@fontsource/newsreader/latin-500.css';
+@import '@fontsource/newsreader/latin-400-italic.css';
+@import '@fontsource/ibm-plex-mono/latin-400.css';
+@import '@fontsource/ibm-plex-mono/latin-500.css';
 @import '@fontsource/hanken-grotesk/latin-400.css';
 @import '@fontsource/hanken-grotesk/latin-500.css';
 @import '@fontsource/hanken-grotesk/latin-600.css';
@@ -11,13 +14,15 @@
 @import '@fontsource/noto-sans-devanagari/devanagari-400.css';
 
 /*
-  Design system — brand palette sampled from the official company profile (BharatFundAxis_Company_Profile.pdf).
-  Forest green + cream + one gold axis line, with navy and sage in support. Gold is reserved for the axis motif,
-  key figures and primary CTAs. Token names are historical: `ink` is forest green, `royal` is emerald.
+  Design system: "the ledger". An editorial fintech language on the profile palette (BharatFundAxis_Company_Profile.pdf):
+  cream paper, forest-green ink, one gold accent. Hairline rules instead of boxes, square edges, numbered sections,
+  large serif display type with italic emphasis, and monospaced figures and labels like a financial statement.
+  Token names are historical: `ink` is forest green, `royal` is emerald, `paper` is cream.
 */
 @theme {
   --color-ink: #0b4a3a;        /* forest green (profile #0b4a3a): headings, dark sections */
   --color-ink-2: #0e5040;      /* raised forest surface */
+  --color-ink-3: #073a2d;      /* deepest forest: ticker, footer base */
   --color-royal: #006b57;      /* emerald: links, focus, interactive */
   --color-royal-soft: #e6ece6; /* soft sage (profile #e6ece6) */
   --color-navy: #0b3a5c;       /* profile navy: supporting business visuals */
@@ -25,15 +30,18 @@
   --color-gold-deep: #7a5a14;  /* gold text on light (AA on cream and gold-pale) */
   --color-gold-pale: #f3e6bf;  /* profile #f3e6bf */
   --color-paper: #fdfbef;      /* cream page background (profile #fdfbef) */
+  --color-paper-2: #f6f1dc;    /* darker cream band */
   --color-line: #e6ddbc;       /* profile card border */
+  --color-rule: rgb(11 74 58 / 0.16); /* hairline rules on cream */
   --color-slate: #3b4744;      /* body text on light */
   --color-mist: #cfe3db;       /* body text on forest (profile #cfe3db) */
 
   --font-display: 'Newsreader', 'Noto Sans Devanagari', Georgia, serif;
   --font-sans: 'Hanken Grotesk', 'Noto Sans Devanagari', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', 'Noto Sans Devanagari', ui-monospace, monospace;
 
-  --radius-card: 14px;
-  --radius-panel: 22px;
+  --radius-card: 4px;
+  --radius-panel: 6px;
 
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -57,16 +65,16 @@
   h1, h2, h3, h4 {
     color: var(--color-ink);
     font-family: var(--font-display);
-    font-weight: 500;
-    line-height: 1.12;
-    letter-spacing: -0.01em;
+    font-weight: 400;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
     text-wrap: balance;
   }
   p { text-wrap: pretty; }
   :focus-visible {
     outline: 2px solid var(--color-royal);
     outline-offset: 3px;
-    border-radius: 4px;
+    border-radius: 2px;
   }
   .on-dark :focus-visible { outline-color: var(--color-gold); }
   ::selection { background: var(--color-gold-pale); color: var(--color-ink); }
@@ -82,65 +90,75 @@
 }
 
 @layer components {
-  .wrap { width: 100%; max-width: 78rem; margin-inline: auto; padding-inline: 1rem; }
+  .wrap { width: 100%; max-width: 80rem; margin-inline: auto; padding-inline: 1rem; }
   @media (min-width: 640px) { .wrap { padding-inline: 1.5rem; } }
-  @media (min-width: 1024px) { .wrap { padding-inline: 2rem; } }
+  @media (min-width: 1024px) { .wrap { padding-inline: 2.5rem; } }
 
   /* Mobile-first rhythm: tighter on phones, opening up on tablets and desktop. */
   .section { padding-block: 3.5rem; }
-  @media (min-width: 640px) { .section { padding-block: 4.75rem; } }
-  @media (min-width: 1024px) { .section { padding-block: 7rem; } }
+  @media (min-width: 640px) { .section { padding-block: 5rem; } }
+  @media (min-width: 1024px) { .section { padding-block: 7.5rem; } }
 
-  /* Eyebrow: a short gold tick on the axis, then the label as the site writes it. */
+  .mono { font-family: var(--font-mono); }
+
+  /* Eyebrow: a monospaced label, like a column header in a financial statement. */
   .eyebrow {
-    display: inline-flex; align-items: center; gap: 0.75rem;
-    font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em;
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    font-family: var(--font-mono); font-size: 0.75rem; font-weight: 500; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--color-gold-deep);
+  }
+  .eyebrow::before { content: ''; width: 0.45rem; height: 0.45rem; background: currentColor; transform: rotate(45deg); flex-shrink: 0; }
+  .on-dark .eyebrow { color: var(--color-gold); }
+  /* Section heads are numbered (§ 01, § 02 …) per page by SectionHead, set on a hairline rule. */
+  .sec-index {
+    display: flex; align-items: baseline; gap: 1rem; padding-top: 0.9rem; border-top: 1px solid var(--color-rule);
+    font-family: var(--font-mono); font-size: 0.75rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
     color: var(--color-gold-deep);
   }
-  .eyebrow::before { content: ''; width: 1.75rem; height: 1px; background: currentColor; }
-  .on-dark .eyebrow { color: var(--color-gold); }
+  .sec-index::before { content: '§ ' attr(data-n); color: var(--color-ink); flex-shrink: 0; }
+  .on-dark .sec-index { border-color: rgb(255 255 255 / 0.2); color: var(--color-gold); }
+  .on-dark .sec-index::before { color: #fff; }
 
-  /* Fluid type: ~33px / 28px / 23px headings on a 320px phone, scaling to the desktop sizes. */
-  .display-xl { font-size: clamp(2.05rem, 1.25rem + 4vw, 4.6rem); }
-  .display-lg { font-size: clamp(1.75rem, 1.3rem + 2.4vw, 3.35rem); }
-  .display-md { font-size: clamp(1.45rem, 1.2rem + 1.3vw, 2.25rem); }
-  .lede { font-size: clamp(1rem, 0.95rem + 0.3vw, 1.15rem); max-width: 62ch; }
+  /* Fluid editorial type: ~36px / 30px / 24px on a 320px phone, scaling to large desktop display sizes. */
+  .display-xl { font-size: clamp(2.25rem, 1rem + 5.4vw, 5.9rem); line-height: 1; letter-spacing: -0.03em; }
+  .display-lg { font-size: clamp(1.9rem, 1.2rem + 3vw, 3.9rem); line-height: 1.04; letter-spacing: -0.025em; }
+  .display-md { font-size: clamp(1.5rem, 1.2rem + 1.4vw, 2.4rem); }
+  .lede { font-size: clamp(1.02rem, 0.95rem + 0.35vw, 1.2rem); max-width: 60ch; }
+  /* Italic emphasis for the second half of a headline. */
+  .accent { font-style: italic; color: var(--color-royal); }
+  .on-dark .accent { color: var(--color-gold); }
+  .figure { font-family: var(--font-display); font-variant-numeric: tabular-nums lining-nums; letter-spacing: -0.03em; line-height: 0.95; }
 
   .btn {
-    display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
-    min-height: 3rem; padding: 0.75rem 1.4rem; border-radius: 999px;
+    position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem;
+    min-height: 3rem; padding: 0.75rem 1.35rem; border-radius: 2px;
     font-weight: 600; font-size: 0.95rem; line-height: 1.2; text-align: center;
-    transition: background-color 0.25s, background-position 0.7s var(--ease-out), color 0.25s, border-color 0.25s,
-      box-shadow 0.3s var(--ease-out), transform 0.3s var(--ease-out);
+    transition: background-color 0.25s, color 0.25s, border-color 0.25s, box-shadow 0.3s var(--ease-out), transform 0.3s var(--ease-out);
   }
-  .btn:active { transform: scale(0.97); }
-  /* Gold CTA: a soft sheen sweeps across on hover. */
-  .btn-gold {
-    color: var(--color-ink);
-    background: linear-gradient(110deg, var(--color-gold) 40%, #ecd28e 50%, var(--color-gold) 60%) 100% 0 / 250% 100%;
-  }
+  .btn:active { transform: translate(1px, 1px); box-shadow: none; }
+  .btn-gold { background: var(--color-gold); color: var(--color-ink); }
+  .btn-ink, .btn-royal { background: var(--color-ink); color: #fff; }
+  .btn-ghost { border: 1px solid rgb(11 74 58 / 0.4); color: var(--color-ink); background: transparent; }
+  .on-dark .btn-ghost { color: #fff; border-color: rgb(255 255 255 / 0.4); }
+  /* Hover: the button lifts off a hard offset shadow, like a stamped ticket. */
   @media (hover: hover) {
-    .btn:hover { transform: translateY(-2px); }
-    .btn:active { transform: scale(0.97); }
-    .btn-gold:hover { background-position: 0 0; box-shadow: 0 14px 30px -14px rgb(184 137 43 / 0.7); }
-    .btn-royal:hover { box-shadow: 0 14px 30px -14px rgb(0 107 87 / 0.55); }
+    .btn:hover { transform: translate(-2px, -2px); }
+    .btn-gold:hover { box-shadow: 4px 4px 0 var(--color-ink); }
+    .btn-ink:hover, .btn-royal:hover { background: var(--color-royal); box-shadow: 4px 4px 0 var(--color-gold); }
+    .btn-ghost:hover { border-color: var(--color-ink); box-shadow: 4px 4px 0 var(--color-gold); }
+    .on-dark .btn-gold:hover { box-shadow: 4px 4px 0 #fff; }
+    .on-dark .btn-ghost:hover { border-color: var(--color-gold); color: var(--color-gold); }
   }
-  .btn-royal { background: var(--color-royal); color: #fff; }
-  .btn-royal:hover { background: #00574a; }
-  .btn-ghost { border: 1px solid var(--color-line); color: var(--color-ink); background: #fff; }
-  .btn-ghost:hover { border-color: var(--color-ink); }
-  .on-dark .btn-ghost { background: transparent; color: #fff; border-color: rgb(255 255 255 / 0.28); }
-  .on-dark .btn-ghost:hover { border-color: var(--color-gold); color: var(--color-gold); }
 
   .card {
-    background: #fff; border: 1px solid var(--color-line); border-radius: var(--radius-card);
-    transition: transform 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out), border-color 0.3s;
+    background: #fff; border: 1px solid var(--color-rule); border-radius: var(--radius-card);
+    transition: transform 0.35s var(--ease-out), box-shadow 0.35s var(--ease-out), border-color 0.3s;
   }
-  /* Interactive cards lift on hover (pointer devices) and press in on touch. */
+  /* Interactive cards lift off a hard gold offset (pointer devices) and press in on touch. */
   @media (hover: hover) {
     :is(a, button).card:hover, .card.group:hover {
-      transform: translateY(-4px); border-color: #d8cb9c;
-      box-shadow: 0 26px 50px -28px rgb(11 74 58 / 0.32);
+      transform: translate(-4px, -4px); border-color: var(--color-ink);
+      box-shadow: 6px 6px 0 var(--color-gold);
     }
   }
   :is(a, button).card:active { transform: scale(0.985); }
@@ -148,12 +166,8 @@
   [data-icon='arrow'] { transition: transform 0.35s var(--ease-out); }
   .group:hover [data-icon='arrow'], .group:focus-visible [data-icon='arrow'], .btn:hover [data-icon='arrow'] { transform: translateX(4px); }
   .glass {
-    background: rgb(255 255 255 / 0.06);
-    border: 1px solid rgb(255 255 255 / 0.12);
-  }
-  /* Backdrop blur is costly on phones (and invisible over flat forest green anyway): desktop only. */
-  @media (min-width: 1024px) {
-    .glass { backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+    background: rgb(255 255 255 / 0.05);
+    border: 1px solid rgb(255 255 255 / 0.14);
   }
 
   /* CTA groups: full-width stacked buttons on phones, inline from 480px. */
@@ -161,35 +175,59 @@
   @media (min-width: 480px) { .cta-row { display: flex; flex-wrap: wrap; } }
   .cta-row.justify-center { justify-content: center; }
 
-
-  /* Coordinate-plane texture used on forest-green sections — the "axis" field. */
+  /* Dark forest field: a fine dot lattice (plotted points) with a navy wash in one corner. */
   .axis-field {
     background-color: var(--color-ink);
     background-image:
-      linear-gradient(rgb(255 255 255 / 0.045) 1px, transparent 1px),
-      linear-gradient(90deg, rgb(255 255 255 / 0.045) 1px, transparent 1px),
-      radial-gradient(60rem 30rem at 85% -10%, rgb(11 58 92 / 0.6), transparent 70%);
-    background-size: 56px 56px, 56px 56px, auto;
+      radial-gradient(rgb(255 255 255 / 0.085) 1px, transparent 1.4px),
+      radial-gradient(60rem 30rem at 90% -10%, rgb(11 58 92 / 0.7), transparent 70%);
+    background-size: 22px 22px, auto;
   }
 
   .tag {
-    display: inline-flex; align-items: center; border-radius: 999px;
-    padding: 0.25rem 0.7rem; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.03em;
-    background: var(--color-royal-soft); color: var(--color-royal);
+    display: inline-flex; align-items: center; border-radius: 2px; border: 1px solid rgb(0 107 87 / 0.28);
+    padding: 0.2rem 0.6rem; font-family: var(--font-mono); font-size: 0.75rem; font-weight: 500; letter-spacing: 0.01em;
+    background: transparent; color: var(--color-royal);
   }
-  .tag-gold { background: var(--color-gold-pale); color: var(--color-gold-deep); }
+  .tag-gold { border-color: rgb(122 90 20 / 0.3); background: var(--color-gold-pale); color: var(--color-gold-deep); }
 
   .field {
-    width: 100%; min-height: 3rem; border-radius: 10px; border: 1px solid var(--color-line);
+    width: 100%; min-height: 3rem; border-radius: 2px; border: 1px solid rgb(11 74 58 / 0.28);
     background: #fff; padding: 0.7rem 0.9rem; color: var(--color-ink); font-size: 1rem;
     transition: border-color 0.15s, box-shadow 0.15s;
   }
-  .field::placeholder { color: #7a837f; }
-  .field:focus { outline: none; border-color: var(--color-royal); box-shadow: 0 0 0 3px rgb(0 107 87 / 0.18); }
+  .field::placeholder { color: #6c7672; }
+  .field:focus { outline: none; border-color: var(--color-ink); box-shadow: 3px 3px 0 var(--color-gold); }
   .field[aria-invalid='true'] { border-color: #b42318; }
 
   input[type='search']::-webkit-search-cancel-button { appearance: none; }
   .prose-legal p, .prose-legal li { max-width: 72ch; }
+}
+
+/* Index rows: full-width numbered rows that fill with forest green on hover (service and region indexes). */
+.index-row { position: relative; isolation: isolate; }
+.index-row::after {
+  content: ''; position: absolute; inset: 0; z-index: -1; background: var(--color-ink);
+  transform: scaleY(0); transform-origin: bottom; transition: transform 0.45s var(--ease-out);
+}
+@media (hover: hover) {
+  .index-row:hover::after { transform: scaleY(1); }
+  .index-row:hover :is(h3, p, span, svg) { color: #fff; }
+  .index-row:hover .index-num { color: var(--color-gold); }
+}
+.index-row :is(h3, p, span, svg) { transition: color 0.3s; }
+
+/* Growth chart in the home hero: lines draw themselves in, bars rise, points pop (transform/opacity/dash only). */
+@keyframes draw { from { stroke-dashoffset: var(--len, 1200); } }
+@keyframes rise { from { transform: scaleY(0); } }
+@keyframes pop { from { opacity: 0; transform: scale(0.4); } }
+.viz-line { stroke-dasharray: var(--len, 1200); animation: draw 2.4s var(--ease-out) var(--d, 0.4s) backwards; }
+.viz-bar { transform-box: fill-box; transform-origin: bottom; animation: rise 1.2s var(--ease-out) var(--d, 0.3s) backwards; }
+.viz-dot { transform-box: fill-box; transform-origin: center; animation: pop 0.6s var(--ease-out) var(--d, 1.6s) backwards; }
+html.preloading :is(.viz-line, .viz-bar, .viz-dot) { animation-play-state: paused; }
+@keyframes orbit { to { transform: rotate(360deg); } }
+@media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+  .orbit { animation: orbit 60s linear infinite; transform-origin: center; transform-box: fill-box; }
 }
 
 /*
@@ -224,7 +262,7 @@
    (html.reveal-ready marks that it did). */
 @keyframes reveal-up { from { opacity: 0; transform: translateY(26px); } }
 @keyframes reveal-left { from { opacity: 0; transform: translateX(-28px); } }
-@keyframes reveal-clip { from { opacity: 0.4; clip-path: inset(0 0 100% 0 round var(--radius-panel)); } }
+@keyframes reveal-clip { from { opacity: 0.4; clip-path: inset(0 0 100% 0); } }
 @keyframes reveal-failsafe { to { opacity: 1; } }
 @media (prefers-reduced-motion: no-preference) {
   html.js .reveal:not([data-shown]) { opacity: 0; }
@@ -241,6 +279,9 @@
 .enter { animation: enter-up 0.9s var(--ease-out) var(--d, 0s) backwards; }
 .enter-scale { animation-name: enter-scale; }
 .enter-fade { animation-name: enter-fade; animation-duration: 1.2s; }
+/* Headline and intro (the LCP text): slide only, never transparent, so they paint at once beneath the preloader. */
+@keyframes enter-rise { from { transform: translateY(22px); } }
+.enter-solid { animation-name: enter-rise; }
 html.preloading .enter { animation-play-state: paused; }
 
 /* Gentle float for hero visuals and a slow drifting glow behind dark panels (transform only: GPU-composited).

@@ -14,17 +14,17 @@ export function validateField(name, value, msg) {
   return ''
 }
 
-/** POSTs to /api/contact (same payload shape as the live site). Gives up after 4s. Returns {ok, error}. */
+/** POSTs to /api/contact. The server answers only after the email is sent, so allow it time. Returns {ok, ref, error}. */
 export async function submitEnquiry(payload) {
   try {
     const res = await fetch('/api/contact', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload),
-      signal: AbortSignal.timeout(4000),
+      signal: AbortSignal.timeout(20000),
     })
     const data = await res.json().catch(() => ({}))
-    return { ok: res.ok && data.success === true, error: data.error }
+    return { ok: res.ok && data.success === true, ref: data.ref, error: data.error }
   } catch {
     return { ok: false }
   }
@@ -41,6 +41,6 @@ export function whatsappUrl(payload) {
   const lines = Object.entries(WA_LABELS)
     .filter(([k]) => payload[k])
     .map(([k, label]) => `${label}: ${payload[k]}`)
-  const text = ['Hello BharatFundAxis, I just submitted an enquiry on your website.', '', ...lines].join('\n')
+  const text = ['Hello BharatFundAxis, I just submitted an enquiry on your website.', '', ...(payload.ref ? [`Reference ID: ${payload.ref}`] : []), ...lines].join('\n')
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`
 }

@@ -37,7 +37,9 @@ Pages are prerendered to static HTML at build time (`scripts/prerender.js`) and 
 - Off-screen sections use `content-visibility: auto` (index.css); keep the first section of each page out of it.
 - Motion (see the "Motion system" block in `index.css`):
   - Brand preloader is inline in `index.html` (first visit per session, 0.9–3.5 s, CSS failsafe at 5 s). It uses the
-    unmodified profile symbol `/img/logo-symbol.webp` on cream, with gold rings and the tagline.
+    unmodified profile symbol `/img/logo-symbol.webp` on cream, with gold rings and the tagline. It lifts when the
+    DOM and fonts are ready (not window load) so it never holds the LCP; hero headline/intro use `.enter-solid`
+    (slide only, never transparent) for the same reason.
   - Page transitions live in `Layout.jsx` (`AnimatePresence`, scroll resets after exit).
   - Hero entrances use `.enter` + `--d` delays; scroll reveals use `.reveal` (+ `reveal-left`, `reveal-clip`), played
     once by `src/lib/reveal.js`; stats use `<CountUp value>` (renders the exact source string server-side).
@@ -50,8 +52,18 @@ Pages are prerendered to static HTML at build time (`scripts/prerender.js`) and 
   - Tap targets ≥ 44px (`min-h-11`). Inputs stay 16px (no iOS zoom). Backdrop blur, float, drift and parallax are
     desktop-only.
   - Don't float elements inside `Dialog`; floats squeeze the content beside them on narrow screens.
+- Design language ("the ledger", see the top of `index.css`): cream paper, hairline rules, square edges (2–6px),
+  hard gold offset shadows on hover, IBM Plex Mono for labels/figures, Newsreader display with an italic `<Accent>`
+  second line (Devanagari gets colour only: it has no italic). `SectionHead` numbers its rule § 01, § 02 … in JS
+  (not CSS counters: `content-visibility` sections contain style and would restart them). `PageHero` takes
+  `tone="light" | "dark"`; alternate them so inner pages don't all open the same way. Don't reintroduce pills,
+  rounded cards, glass or gradients: the redesign must not resemble bharatfundaxis.com.
 - Design tokens are in `src/index.css` (`@theme`), sampled from the profile PDF. Names are historical: `ink` = forest green,
   `royal` = emerald, `paper` = cream; `navy` and `royal-soft` (sage) support. `gold` is the profile gold lifted to AA on
   forest; use `gold-deep` for gold text on light. Gold is reserved for the axis motif, key figures and primary CTAs.
 - Accessibility floor: keyboard focus visible, ARIA tabs via `useTabs`, native `<details>`/`<dialog>`, reduced motion respected.
 - Secrets only via env vars (`.env.example`); never commit keys.
+- Forms: every form uses `EnquiryForm` → `POST /api/contact`. The API validates, rejects honeypot/too-fast/cross-site
+  posts, rate-limits, emails support@bharatfundaxis.com (SMTP via Nodemailer, else Resend) with a `BFA-YYMMDD-XXXXXX`
+  reference ID, then optionally alerts WhatsApp Cloud API and stores to KV. The visitor sees success (with the
+  reference ID and a WhatsApp hand-off link) only after the email is accepted. `npm test` covers this with a mocked provider.

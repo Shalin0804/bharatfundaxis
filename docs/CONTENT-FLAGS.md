@@ -60,7 +60,7 @@ per-sector approval rates (92–98%) and "Fast-Track" sanction turnarounds (5–
 
 ## F. WhatsApp number — confirm before launch
 
-Forms redirect to WhatsApp on `+91-9928965676` (the site's published phone; set in `src/data/site.js` → `WHATSAPP_NUMBER`).
+After a confirmed submission, forms offer a WhatsApp hand-off to `+91-9928965676` (the site's published phone; set in `src/data/site.js` → `WHATSAPP_NUMBER`). The mobile action bar links there too.
 When tested on 2026-11-10, WhatsApp showed this number's business profile as **"Technologia"**, not BharatFundAxis.
 Confirm the correct WhatsApp line, or update the profile name, before launch.
 
