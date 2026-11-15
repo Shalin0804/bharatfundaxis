@@ -22,6 +22,11 @@ Pages are prerendered to static HTML at build time (`scripts/prerender.js`) and 
 ## Rules
 - **Content is verbatim from the live site** and lives only in `src/data/*.js`. Do not rewrite, "fix" or invent copy,
   numbers, schemes, stats or contact details. Known issues are listed in `docs/CONTENT-FLAGS.md` for the business to decide.
+- **Brand source:** `BharatFundAxis_Company_Profile.pdf` (logo, colours, tagline, and the About/Services content in
+  `src/data/profile.js`, verbatim). Where the PDF and live site differ, the live site wins for existing pages; flag it in
+  CONTENT-FLAGS section G. The PDF's full logo lockup misspells the name ("BhartFundAxis"): never use it. Use the symbol
+  (`/img/logo-symbol.*`, `/img/logo-mark.webp`) unmodified, beside the live-text wordmark in `Logo.jsx`.
+  `python scripts/brand-assets.py <pdf>` regenerates the symbol, favicons and app icons.
 - Pages are presentation only; add content to the data files, not JSX.
 - SEO metadata per route lives in `src/seo.js` (titles, descriptions, canonical, JSON-LD). New routes must be added there
   and in `App.jsx`; the prerender script and sitemap pick them up from `PAGES`.
@@ -32,7 +37,7 @@ Pages are prerendered to static HTML at build time (`scripts/prerender.js`) and 
 - Off-screen sections use `content-visibility: auto` (index.css); keep the first section of each page out of it.
 - Motion (see the "Motion system" block in `index.css`):
   - Brand preloader is inline in `index.html` (first visit per session, 0.9–3.5 s, CSS failsafe at 5 s). It uses the
-    unmodified `/img/logo-full.webp` (same artwork as the live site's `Logo-full.PNG`) on an ivory disc.
+    unmodified profile symbol `/img/logo-symbol.webp` on cream, with gold rings and the tagline.
   - Page transitions live in `Layout.jsx` (`AnimatePresence`, scroll resets after exit).
   - Hero entrances use `.enter` + `--d` delays; scroll reveals use `.reveal` (+ `reveal-left`, `reveal-clip`), played
     once by `src/lib/reveal.js`; stats use `<CountUp value>` (renders the exact source string server-side).
@@ -45,6 +50,8 @@ Pages are prerendered to static HTML at build time (`scripts/prerender.js`) and 
   - Tap targets ≥ 44px (`min-h-11`). Inputs stay 16px (no iOS zoom). Backdrop blur, float, drift and parallax are
     desktop-only.
   - Don't float elements inside `Dialog`; floats squeeze the content beside them on narrow screens.
-- Design tokens are in `src/index.css` (`@theme`). Gold is reserved for the axis motif, key figures and primary CTAs.
+- Design tokens are in `src/index.css` (`@theme`), sampled from the profile PDF. Names are historical: `ink` = forest green,
+  `royal` = emerald, `paper` = cream; `navy` and `royal-soft` (sage) support. `gold` is the profile gold lifted to AA on
+  forest; use `gold-deep` for gold text on light. Gold is reserved for the axis motif, key figures and primary CTAs.
 - Accessibility floor: keyboard focus visible, ARIA tabs via `useTabs`, native `<details>`/`<dialog>`, reduced motion respected.
 - Secrets only via env vars (`.env.example`); never commit keys.

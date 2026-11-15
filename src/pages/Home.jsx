@@ -4,12 +4,13 @@ import { AnimatePresence, m } from 'framer-motion'
 import BannerCarousel from '../components/BannerCarousel.jsx'
 import Icon from '../components/Icon.jsx'
 import { useTabs } from '../components/Tabs.jsx'
-import { SectionHead, Accordion, JsonLd, CheckList, CountUp } from '../components/ui.jsx'
+import { SectionHead, Accordion, JsonLd, CheckList, CountUp, TONE } from '../components/ui.jsx'
 import { PARTNERS } from '../data/site.js'
 import {
   HERO, FRAMEWORK, CORRIDORS, ECOSYSTEM, SECTORS, SOVEREIGN_SCHEMES,
   ROADMAP, DISPATCHES, FAQ, KNOWLEDGE, FINAL_CTA,
 } from '../data/home.js'
+import { WHAT_WE_DO } from '../data/profile.js'
 
 const fade = { initial: { opacity: 0, y: 10 }, animate: { opacity: 1, y: 0 }, exit: { opacity: 0, y: -6 }, transition: { duration: 0.28, ease: [0.22, 1, 0.36, 1] } }
 
@@ -21,7 +22,7 @@ function Hero() {
         <div className="glow -right-48 top-0 size-[46rem]" />
       </div>
       {/* The axis: one gold vertical line the hero copy hangs from. */}
-      <div aria-hidden="true" className="enter enter-fade absolute inset-y-0 left-[max(1rem,calc(50%-37rem))] w-px bg-gradient-to-b from-transparent via-gold/70 to-gold/10" />
+      <div aria-hidden="true" className="enter enter-fade absolute inset-y-0 left-[max(1rem,calc(50%-38rem))] w-px bg-gradient-to-b from-transparent via-gold/70 to-gold/10" />
       <div className="wrap relative grid items-center gap-12 lg:grid-cols-[1.2fr_0.8fr] lg:gap-14">
         <div className="pl-4 sm:pl-8">
           <p className="eyebrow enter mb-5 sm:mb-7">{HERO.eyebrow}</p>
@@ -77,6 +78,36 @@ function Partners() {
           {row(false)}
           {row(true)}
         </div>
+      </div>
+    </section>
+  )
+}
+
+// The five service verticals from the company profile, each linking to its section on /services.
+
+function Verticals() {
+  const w = WHAT_WE_DO
+  return (
+    <section className="section pb-0 sm:pb-0 lg:pb-0">
+      <div className="wrap">
+        <div className="grid gap-6 lg:grid-cols-[1.3fr_1fr] lg:items-end">
+          <SectionHead eyebrow={w.eyebrow} title={w.title} copy={w.copy} />
+          <div className="reveal lg:justify-self-end">
+            <Link to="/services" className="btn btn-ghost">Services <Icon name="arrow" size={18} /></Link>
+          </div>
+        </div>
+        <ul aria-label={w.title} className="rail mt-10 grid gap-4 sm:mt-14 sm:grid-cols-2 lg:grid-cols-5">
+          {w.verticals.map((v, i) => (
+            <li key={v.id} className="reveal">
+              <Link to={`/services#${v.id}`} className="card group flex h-full flex-col p-5 sm:p-6">
+                <span className={`grid size-11 place-items-center rounded-xl font-display text-lg ${TONE[i]}`}>0{i + 1}</span>
+                <h3 className="mt-5 font-display text-xl">{v.title}</h3>
+                <p className="mt-2 flex-1 text-sm">{v.copy}</p>
+                <Icon name="arrow" size={18} className="mt-5 text-royal" />
+              </Link>
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   )
@@ -482,6 +513,7 @@ export default function Home() {
       <JsonLd path="/" faqs={FAQ.items} />
       <Hero />
       <Partners />
+      <Verticals />
       <Framework />
       <Corridors />
       <Ecosystem />

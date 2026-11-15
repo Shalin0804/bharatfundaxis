@@ -11,22 +11,23 @@
 @import '@fontsource/noto-sans-devanagari/devanagari-400.css';
 
 /*
-  Design system — "The Axis"
-  Navy ledger + royal blue + one gold axis line. Gold is reserved for the axis motif,
-  key figures and primary CTAs; everything else stays in navy/slate on cool paper.
+  Design system — brand palette sampled from the official company profile (BharatFundAxis_Company_Profile.pdf).
+  Forest green + cream + one gold axis line, with navy and sage in support. Gold is reserved for the axis motif,
+  key figures and primary CTAs. Token names are historical: `ink` is forest green, `royal` is emerald.
 */
 @theme {
-  --color-ink: #0a1838;        /* deep navy: headings, dark sections */
-  --color-ink-2: #12224a;      /* raised navy surface */
-  --color-royal: #2747c7;      /* royal blue: links, focus, interactive */
-  --color-royal-soft: #e9eefc;
-  --color-gold: #c9a24c;       /* axis + figures on dark */
-  --color-gold-deep: #765a14;  /* gold text on light (AA on paper and gold-pale) */
-  --color-gold-pale: #f3ead3;
-  --color-paper: #f4f6fa;      /* cool neutral page background */
-  --color-line: #dbe1ec;
-  --color-slate: #48557a;      /* body text on light */
-  --color-mist: #a9b4cf;       /* body text on navy */
+  --color-ink: #0b4a3a;        /* forest green (profile #0b4a3a): headings, dark sections */
+  --color-ink-2: #0e5040;      /* raised forest surface */
+  --color-royal: #006b57;      /* emerald: links, focus, interactive */
+  --color-royal-soft: #e6ece6; /* soft sage (profile #e6ece6) */
+  --color-navy: #0b3a5c;       /* profile navy: supporting business visuals */
+  --color-gold: #d1ab4f;       /* profile gold #b8892b lifted to AA (4.7:1) for text on forest */
+  --color-gold-deep: #7a5a14;  /* gold text on light (AA on cream and gold-pale) */
+  --color-gold-pale: #f3e6bf;  /* profile #f3e6bf */
+  --color-paper: #fdfbef;      /* cream page background (profile #fdfbef) */
+  --color-line: #e6ddbc;       /* profile card border */
+  --color-slate: #3b4744;      /* body text on light */
+  --color-mist: #cfe3db;       /* body text on forest (profile #cfe3db) */
 
   --font-display: 'Newsreader', 'Noto Sans Devanagari', Georgia, serif;
   --font-sans: 'Hanken Grotesk', 'Noto Sans Devanagari', system-ui, sans-serif;
@@ -116,16 +117,16 @@
   /* Gold CTA: a soft sheen sweeps across on hover. */
   .btn-gold {
     color: var(--color-ink);
-    background: linear-gradient(110deg, var(--color-gold) 40%, #e6c987 50%, var(--color-gold) 60%) 100% 0 / 250% 100%;
+    background: linear-gradient(110deg, var(--color-gold) 40%, #ecd28e 50%, var(--color-gold) 60%) 100% 0 / 250% 100%;
   }
   @media (hover: hover) {
     .btn:hover { transform: translateY(-2px); }
     .btn:active { transform: scale(0.97); }
-    .btn-gold:hover { background-position: 0 0; box-shadow: 0 14px 30px -14px rgb(201 162 76 / 0.75); }
-    .btn-royal:hover { box-shadow: 0 14px 30px -14px rgb(39 71 199 / 0.6); }
+    .btn-gold:hover { background-position: 0 0; box-shadow: 0 14px 30px -14px rgb(184 137 43 / 0.7); }
+    .btn-royal:hover { box-shadow: 0 14px 30px -14px rgb(0 107 87 / 0.55); }
   }
   .btn-royal { background: var(--color-royal); color: #fff; }
-  .btn-royal:hover { background: #1f3aa8; }
+  .btn-royal:hover { background: #00574a; }
   .btn-ghost { border: 1px solid var(--color-line); color: var(--color-ink); background: #fff; }
   .btn-ghost:hover { border-color: var(--color-ink); }
   .on-dark .btn-ghost { background: transparent; color: #fff; border-color: rgb(255 255 255 / 0.28); }
@@ -138,8 +139,8 @@
   /* Interactive cards lift on hover (pointer devices) and press in on touch. */
   @media (hover: hover) {
     :is(a, button).card:hover, .card.group:hover {
-      transform: translateY(-4px); border-color: #c6cfe2;
-      box-shadow: 0 26px 50px -28px rgb(10 24 56 / 0.38);
+      transform: translateY(-4px); border-color: #d8cb9c;
+      box-shadow: 0 26px 50px -28px rgb(11 74 58 / 0.32);
     }
   }
   :is(a, button).card:active { transform: scale(0.985); }
@@ -150,7 +151,7 @@
     background: rgb(255 255 255 / 0.06);
     border: 1px solid rgb(255 255 255 / 0.12);
   }
-  /* Backdrop blur is costly on phones (and invisible over flat navy anyway): desktop only. */
+  /* Backdrop blur is costly on phones (and invisible over flat forest green anyway): desktop only. */
   @media (min-width: 1024px) {
     .glass { backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
   }
@@ -161,13 +162,13 @@
   .cta-row.justify-center { justify-content: center; }
 
 
-  /* Coordinate-plane texture used on navy sections — the "axis" field. */
+  /* Coordinate-plane texture used on forest-green sections — the "axis" field. */
   .axis-field {
     background-color: var(--color-ink);
     background-image:
       linear-gradient(rgb(255 255 255 / 0.045) 1px, transparent 1px),
       linear-gradient(90deg, rgb(255 255 255 / 0.045) 1px, transparent 1px),
-      radial-gradient(60rem 30rem at 85% -10%, rgb(39 71 199 / 0.55), transparent 70%);
+      radial-gradient(60rem 30rem at 85% -10%, rgb(11 58 92 / 0.6), transparent 70%);
     background-size: 56px 56px, 56px 56px, auto;
   }
 
@@ -183,8 +184,8 @@
     background: #fff; padding: 0.7rem 0.9rem; color: var(--color-ink); font-size: 1rem;
     transition: border-color 0.15s, box-shadow 0.15s;
   }
-  .field::placeholder { color: #7b86a3; }
-  .field:focus { outline: none; border-color: var(--color-royal); box-shadow: 0 0 0 3px rgb(39 71 199 / 0.15); }
+  .field::placeholder { color: #7a837f; }
+  .field:focus { outline: none; border-color: var(--color-royal); box-shadow: 0 0 0 3px rgb(0 107 87 / 0.18); }
   .field[aria-invalid='true'] { border-color: #b42318; }
 
   input[type='search']::-webkit-search-cancel-button { appearance: none; }
@@ -248,7 +249,7 @@ html.preloading .enter { animation-play-state: paused; }
 @keyframes drift { 50% { transform: translate3d(-6%, 4%, 0) scale(1.1); } }
 .glow {
   position: absolute; pointer-events: none; border-radius: 50%;
-  background: radial-gradient(closest-side, rgb(201 162 76 / 0.16), rgb(39 71 199 / 0.12) 55%, transparent);
+  background: radial-gradient(closest-side, rgb(209 171 79 / 0.16), rgb(0 107 87 / 0.14) 55%, transparent);
 }
 @media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
   .float { animation: float 7s ease-in-out infinite; }

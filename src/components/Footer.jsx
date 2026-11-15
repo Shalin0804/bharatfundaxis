@@ -1,7 +1,7 @@
 import { Link } from 'react-router'
 import Logo from './Logo.jsx'
 import Icon from './Icon.jsx'
-import { NAV, CONTACT, FOOTER_TAGLINE, DISCLAIMER, COPYRIGHT } from '../data/site.js'
+import { NAV, CONTACT, FOOTER_TAGLINE, DISCLAIMER, COPYRIGHT, TAGLINE, VERTICALS } from '../data/site.js'
 
 const heading = 'mb-3 font-sans text-xs font-semibold tracking-[0.12em] text-white/90 sm:mb-4'
 
@@ -29,6 +29,14 @@ export default function Footer() {
         <div className="sm:col-span-2 lg:col-span-1">
           <Logo />
           <p className="mt-5 max-w-sm text-[0.95rem]">{FOOTER_TAGLINE}</p>
+          <p className="mt-5 text-xs font-semibold tracking-[0.24em] text-gold">{TAGLINE}</p>
+          <ul aria-label="What We Do" className="mt-2 flex flex-wrap gap-x-4 text-sm">
+            {VERTICALS.map((v) => (
+              <li key={v.id}>
+                <Link to={`/services#${v.id}`} className="inline-flex min-h-11 items-center transition-colors hover:text-gold">{v.title}</Link>
+              </li>
+            ))}
+          </ul>
         </div>
         <nav aria-label="Footer">
           <h2 className={heading}>QUICK LINKS</h2>

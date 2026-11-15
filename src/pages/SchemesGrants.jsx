@@ -120,7 +120,7 @@ export default function SchemesGrants() {
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder={H.searchPlaceholder}
-                className="min-h-13 w-full bg-transparent py-3 text-ink outline-none placeholder:text-[#7b86a3]"
+                className="min-h-13 w-full bg-transparent py-3 text-ink outline-none placeholder:text-[#7a837f]"
               />
               {query && (
                 <button type="button" onClick={() => setQuery('')} className="shrink-0 rounded-full px-3 py-1 text-sm text-royal hover:bg-royal-soft">{H.clear}</button>
@@ -139,7 +139,7 @@ export default function SchemesGrants() {
                 <button
                   type="button"
                   onClick={() => setOpen({ s, tag: L.popularTag })}
-                  className="axis-field group flex h-full w-full flex-col rounded-[var(--radius-panel)] p-6 text-left text-white transition-[transform,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-[0_26px_50px_-24px_rgb(10_24_56/0.55)] active:scale-[0.985]"
+                  className="axis-field group flex h-full w-full flex-col rounded-[var(--radius-panel)] p-6 text-left text-white transition-[transform,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-[0_26px_50px_-24px_rgb(11_74_58/0.55)] active:scale-[0.985]"
                 >
                   <p className="text-xs font-semibold tracking-wide text-gold">{s.category}</p>
                   <h3 className="mt-3 font-display text-2xl leading-tight text-white">{s.title}</h3>

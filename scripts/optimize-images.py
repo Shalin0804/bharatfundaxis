@@ -36,14 +36,4 @@ save("popup.jpeg", "img/popup.webp", width=640, quality=72)
 for p in (SRC / "logos").glob("*.png"):
     save(f"logos/{p.name}", f"img/logos/{p.stem}.webp", height=112, quality=80)
 
-save("Logo2.png", "img/emblem.webp", width=192, quality=82)
-save("Logo1.png", "img/logo-full.webp", width=720, quality=78)
-save("Logo2.png", "apple-touch-icon.png", width=180, fmt="PNG")
-save("Logo2.png", "favicon-32.png", width=32, fmt="PNG")
-
-# Open Graph card 1200x630: full logo centered on its own background colour
-og = Image.open(SRC / "Logo1.png").convert("RGB")
-og = og.resize((1200, round(og.height * 1200 / og.width)), Image.LANCZOS)
-top = (og.height - 630) // 2
-og.crop((0, top, 1200, top + 630)).save(OUT / "og-image.jpg", "JPEG", quality=80)
-print("og-image.jpg", (OUT / "og-image.jpg").stat().st_size // 1024, "KB")
+# Brand logo, favicons and app icons come from the company profile PDF: see scripts/brand-assets.py.

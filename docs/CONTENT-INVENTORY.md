@@ -13,10 +13,12 @@ Full verbatim copy lives in `src/data/*.js` — that is the canonical content re
 | `/schemes-grants` | Schemes & Government Grants Database | yes | `schemes.js` |
 | `/beyond-funding` | Beyond Funding – Long-Term Growth Advisory | yes | `beyond.js` |
 | `/contact` | Contact Nodal Advisory Desk | yes | `contact.js` |
+| `/about` | (new — from the company profile PDF) | yes | `profile.js` |
+| `/services` | (new — from the company profile PDF; anchors `#funding` `#grants` `#certificates` `#marketing` `#business-solutions` `#how-we-work` `#getting-started`) | yes | `profile.js` |
 | `/privacy-policy` | Privacy Policy & Vulnerability Disclosure Program | yes | `legal.js` |
 | `/terms-of-service` | Terms of Service & Statutory Disclaimers | yes | `legal.js` |
 
-No other public pages exist: there are no individual scheme, industry, blog-article or FAQ pages.
+No other public pages exist on the live site (About and Services come from the company profile PDF): there are no individual scheme, industry, blog-article or FAQ pages.
 Scheme / industry / report "detail pages" on the live site are modals — rebuilt as accessible dialogs.
 Every "article" card links to `/market-suchna`; news items link to external publishers.
 `/api/*` is disallowed in robots.txt (form endpoint only).
@@ -55,7 +57,7 @@ Google Map · Enquiry FAQ (5) · closing CTA.
 
 ## Images (all from the live site, re-encoded to WebP at web size)
 
-Brand: lotus emblem, full logo. Banners: Rajasthan grant, CGTMSE, business loan. Partner logos: SIDBI, DPIIT, Startup India,
+Brand: the live site's lotus logo was replaced by the official three-circle symbol from the company profile PDF. Banners: Rajasthan grant, CGTMSE, business loan. Partner logos: SIDBI, DPIIT, Startup India,
 Make in India, NASSCOM, NABARD. Editorial images (11, de-duplicated — the live site served identical files from 3 folders).
 Popup image, advisory portrait. Total image weight dropped from 27 MB to 1.4 MB.
 

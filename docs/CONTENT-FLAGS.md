@@ -63,3 +63,18 @@ per-sector approval rates (92–98%) and "Fast-Track" sanction turnarounds (5–
 Forms redirect to WhatsApp on `+91-9928965676` (the site's published phone; set in `src/data/site.js` → `WHATSAPP_NUMBER`).
 When tested on 2026-11-10, WhatsApp showed this number's business profile as **"Technologia"**, not BharatFundAxis.
 Confirm the correct WhatsApp line, or update the profile name, before launch.
+
+## G. Company profile PDF vs. live site (added 2026-11-15)
+
+The official brand now comes from `BharatFundAxis_Company_Profile.pdf` (dated 2026-10-29). Its content is on the new
+`/about` and `/services` pages (`src/data/profile.js`, verbatim). Points to confirm:
+
+| Item | Profile PDF | Live site / rebuild |
+|---|---|---|
+| **Logo wordmark spelling** | The full logo lockup (cover page) reads "**BhartFundAxis**" (missing "a") | The rebuild uses the profile's **symbol** unchanged, beside the wordmark "BharatFundAxis" set as the profile's own page headers set it. Fix the lockup artwork before using it anywhere. |
+| Logo | Three overlapping circles (people · partnership · growth) | Live site uses a gold lotus logo. Replaced site-wide by the profile symbol (header, footer, preloader, favicons, OG image). |
+| Brand colours | Forest green, gold, cream, navy | Live site was navy/royal blue. Rebuild now uses the profile palette. |
+| Services | Five verticals: Funding, Grants, Certificates, **Marketing**, **Business Solutions** | Live site describes government-scheme and capital advisory only; marketing (brand identity, websites, social media, ads) is not mentioned anywhere on it. |
+| Positioning | "business support and growth partner"; "We never make unrealistic promises" | Live site: "India's Premier Sovereign Funding & Capital Advisory Navigator", plus the claims in section C. |
+| Legal name | "BharatFundAxis" only | Live site: "BharatfundAxis Capital Management" (footer, disclaimer). |
+| Numbered labels | Section numbers ("03 | OUR EXPERTISE"); Grants and Certificates share "SERVICES 02 AND 03" | Rebuild shows "SERVICE 02" and "SERVICE 03" on their own sections. |

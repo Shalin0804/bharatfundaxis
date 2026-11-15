@@ -14,6 +14,18 @@ export const PAGES = {
       'Unlock sovereign capital, government subsidies, CGTMSE credit lines, and bankable TEV feasibility reports for Indian enterprises.',
     priority: '1.0', changefreq: 'daily',
   },
+  '/about': {
+    title: 'About Us – Who We Are, Our Values & Who We Serve | BharatFundAxis',
+    description:
+      'A trusted growth partner for startups, MSMEs and established businesses, bringing funding, grants, certificates, marketing and business solutions under one roof.',
+    crumb: 'About Us', priority: '0.8', changefreq: 'monthly',
+  },
+  '/services': {
+    title: 'Our Services – Funding, Grants, Certificates, Marketing & Business Solutions | BharatFundAxis',
+    description:
+      'We support businesses across their complete journey: from getting started and getting approved, to getting funded and getting noticed. Our work is organised into five connected service verticals, so you never need to run from one agency to another.',
+    crumb: 'Services', priority: '0.9', changefreq: 'monthly',
+  },
   '/market-suchna': {
     title: "Market Suchna – India's Sovereign Business Intelligence | BharatFundAxis",
     description:
@@ -65,7 +77,7 @@ const ORG = {
   '@id': `${SITE_URL}/#organization`,
   name: LEGAL_NAME,
   url: SITE_URL,
-  logo: `${SITE_URL}/img/logo-full.webp`,
+  logo: `${SITE_URL}/img/logo-symbol.png`,
   image: `${SITE_URL}/og-image.jpg`,
   description:
     "India's premier corporate financial consulting platform facilitating sovereign government grants, MSME subvention lines, CGTMSE credit access, and TEV feasibility reports.",

@@ -7,10 +7,22 @@ export const LEGAL_NAME = 'BharatfundAxis Capital Management'
 
 export const NAV = [
   { to: '/', label: 'Home' },
+  { to: '/about', label: 'About' },
+  { to: '/services', label: 'Services' },
   { to: '/market-suchna', label: 'Market Suchna' },
   { to: '/schemes-grants', label: 'Schemes & Grants' },
   { to: '/beyond-funding', label: 'Beyond Funding' },
   { to: '/contact', label: 'Contact Us' },
+]
+
+// From the company profile PDF (src/data/profile.js has the rest). Kept here because the footer is on every page.
+export const TAGLINE = 'YOUR BUSINESS. OUR PRIORITY.'
+export const VERTICALS = [
+  { id: 'funding', title: 'Funding' },
+  { id: 'grants', title: 'Grants' },
+  { id: 'certificates', title: 'Certificates' },
+  { id: 'marketing', title: 'Marketing' },
+  { id: 'business-solutions', title: 'Business Solutions' },
 ]
 
 export const APPLY_HREF = '/contact#connection-panels'

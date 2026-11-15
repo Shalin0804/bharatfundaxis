@@ -48,7 +48,7 @@ export default function BannerCarousel() {
         </div>
         <Link
           to="/contact#connection-panels"
-          className="mt-2.5 flex min-h-12 items-center justify-center gap-2 rounded-xl bg-gold px-4 py-3 text-center text-[0.8rem] font-bold tracking-wide text-ink transition-colors hover:bg-[#d8b363]"
+          className="mt-2.5 flex min-h-12 items-center justify-center gap-2 rounded-xl bg-gold px-4 py-3 text-center text-[0.8rem] font-bold tracking-wide text-ink transition-colors hover:bg-[#ddb95f]"
         >
           {b.cta}
         </Link>

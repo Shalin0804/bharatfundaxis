@@ -19,8 +19,8 @@ function Ticker() {
     </ul>
   )
   return (
-    <div className="marquee-host relative flex h-9 items-center overflow-hidden border-b border-white/10 bg-[#071029]">
-      <p className="relative z-10 flex h-full shrink-0 items-center gap-2 bg-[#071029] pl-4 pr-3 text-[0.7rem] font-bold tracking-[0.12em] text-gold sm:pl-6">
+    <div className="marquee-host relative flex h-9 items-center overflow-hidden border-b border-white/10 bg-[#073a2d]">
+      <p className="relative z-10 flex h-full shrink-0 items-center gap-2 bg-[#073a2d] pl-4 pr-3 text-[0.7rem] font-bold tracking-[0.12em] text-gold sm:pl-6">
         <span className="pulse-dot size-1.5 rounded-full bg-gold" aria-hidden="true" />
         UPDATES
       </p>

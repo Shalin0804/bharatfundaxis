@@ -25,6 +25,8 @@ const page = (load) =>
     }),
   )
 const Home = page(() => import('./pages/Home.jsx'))
+const About = page(() => import('./pages/About.jsx'))
+const Services = page(() => import('./pages/Services.jsx'))
 const MarketSuchna = page(() => import('./pages/MarketSuchna.jsx'))
 const SchemesGrants = page(() => import('./pages/SchemesGrants.jsx'))
 const BeyondFunding = page(() => import('./pages/BeyondFunding.jsx'))
@@ -61,6 +63,8 @@ export default function App() {
       <Routes>
         <Route element={<Layout />}>
           <Route index element={<Home />} />
+          <Route path="about" element={<About />} />
+          <Route path="services" element={<Services />} />
           <Route path="market-suchna" element={<MarketSuchna />} />
           <Route path="schemes-grants" element={<SchemesGrants />} />
           <Route path="beyond-funding" element={<BeyondFunding />} />

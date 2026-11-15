@@ -95,7 +95,7 @@ function Model() {
             ))}
           </div>
           <div {...panelProps} className="axis-field on-dark relative overflow-hidden rounded-[var(--radius-panel)] p-6 text-white sm:p-10 lg:sticky lg:top-36 lg:self-start">
-            <img src="/img/logo-full.webp" alt="Bharat Fund Axis Logo" width="720" height="480" loading="lazy" className="absolute -right-16 -top-10 w-64 rounded-full opacity-10" />
+            <img src="/img/logo-symbol.webp" alt="" width="499" height="455" loading="lazy" className="absolute -right-12 -top-8 w-56 opacity-10" />
             <AnimatePresence mode="wait" initial={false}>
               <m.div key={n.label} {...fade} className="relative">
                 <p className="eyebrow">{MODEL.specLabel}</p>
@@ -148,7 +148,7 @@ function Difference() {
       <div className="wrap">
         <SectionHead eyebrow={DIFFERENCE.eyebrow} title={DIFFERENCE.title} />
         <div className="mt-12 grid gap-6 md:grid-cols-2">
-          <div className="reveal rounded-[var(--radius-panel)] border border-dashed border-[#c9cfdc] bg-white/50 p-6 sm:p-8">
+          <div className="reveal rounded-[var(--radius-panel)] border border-dashed border-[#d8cfae] bg-white/50 p-6 sm:p-8">
             <p className="flex items-center gap-2 text-xs font-semibold tracking-wide text-[#8a1c12]"><Icon name="close" size={16} />{typical.tag}</p>
             <h3 className="mt-4 font-display text-2xl text-slate">{typical.title}</h3>
             <p className="mt-3">{typical.copy}</p>

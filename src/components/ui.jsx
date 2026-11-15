@@ -109,7 +109,7 @@ export function Breadcrumbs({ label }) {
   )
 }
 
-/** Navy hero used by inner pages. `aside` renders in the right column on desktop. */
+/** Forest-green hero used by inner pages. `aside` renders in the right column on desktop. */
 export function PageHero({ crumb, eyebrow, title, copy, ctas = [], aside, children }) {
   const [a, b] = title
   return (
@@ -117,7 +117,7 @@ export function PageHero({ crumb, eyebrow, title, copy, ctas = [], aside, childr
       <div aria-hidden="true" className="parallax absolute inset-x-0 -top-40 h-[40rem]">
         <div className="glow -right-40 top-0 size-[40rem]" />
       </div>
-      <div aria-hidden="true" className="enter-fade enter absolute inset-y-0 left-[max(1rem,calc(50%-37rem))] hidden w-px lg:block bg-gradient-to-b from-transparent via-gold/60 to-transparent" />
+      <div aria-hidden="true" className="enter-fade enter absolute inset-y-0 left-[max(1rem,calc(50%-38rem))] hidden w-px lg:block bg-gradient-to-b from-transparent via-gold/60 to-transparent" />
       <div className="wrap relative grid items-end gap-10 lg:grid-cols-[1.25fr_1fr] lg:gap-12">
         <div>
           <div className="enter enter-fade">
@@ -179,6 +179,9 @@ export function Dialog({ open, onClose, label, children, className = '' }) {
     </dialog>
   )
 }
+
+// The company profile alternates forest, navy and gold for its five service verticals.
+export const TONE = ['bg-ink text-white', 'bg-navy text-white', 'bg-gold text-ink', 'bg-ink text-white', 'bg-navy text-white']
 
 export function CheckList({ items, className = '', dark = false }) {
   return (

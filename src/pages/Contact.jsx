@@ -109,7 +109,7 @@ export default function Contact() {
 
       <section id="writing-desk" className="pb-20 lg:pb-28">
         <div className="wrap">
-          <div className="mx-auto max-w-3xl rounded-[var(--radius-panel)] bg-white p-6 shadow-[0_40px_80px_-50px_rgb(10_24_56/0.5)] ring-1 ring-line sm:p-10">
+          <div className="mx-auto max-w-3xl rounded-[var(--radius-panel)] bg-white p-6 shadow-[0_40px_80px_-50px_rgb(11_74_58/0.5)] ring-1 ring-line sm:p-10">
             <AnimatePresence mode="wait" initial={false}>
               <m.div key={path.id} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} transition={{ duration: 0.25 }}>
                 <p className="eyebrow">{path.form.tag}</p>
